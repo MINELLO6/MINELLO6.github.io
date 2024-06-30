@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>&#39;Perceptron&#39;</title>
+    <link href="/2024/06/30/Perceptron/"/>
+    <url>/2024/06/30/Perceptron/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Perceptron is kind of supervised learning for binary classifier. It is an algorithm for learning the threshold function. </p><h2 id="Model-building"><a href="#Model-building" class="headerlink" title="Model building"></a>Model building</h2><p>Assume we have a linearly separable data set, ensuring that the algorithm can converge. Our objective is to separate the sample points using a hyperplane, whose normal vector is determined by minimizing the loss function associated with the misclassified points. It should be noted that this solution is not unique.<br>$$<br>Sample : set: {( \mathbf{x}<em>i, y_i )|</em>{i&#x3D;1}^N} \<br>\mathbf{x}_i \in \mathbb{R}^{d}, :y \in {-1, +1}<br>$$</p><p>$$</p><p>$$<br>Not ended</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Machine Learning</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Framework</title>
     <link href="/2024/06/30/Framework/"/>
     <url>/2024/06/30/Framework/</url>
