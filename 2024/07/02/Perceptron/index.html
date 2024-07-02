@@ -16,24 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This is for trying the availablity of writing latex in markdown file">
+    <meta name="description" content="Introduction Perceptron is kind of supervised learning for binary classifier. It is an algorithm for learning the threshold function. Model building Assume we have a linearly separable data set, e">
 <meta property="og:type" content="article">
-<meta property="og:title" content="&#39;Math&#39;">
-<meta property="og:url" content="http://example.com/2024/06/27/Math/index.html">
+<meta property="og:title" content="Perceptron">
+<meta property="og:url" content="http://example.com/2024/07/02/Perceptron/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="This is for trying the availablity of writing latex in markdown file">
+<meta property="og:description" content="Introduction Perceptron is kind of supervised learning for binary classifier. It is an algorithm for learning the threshold function. Model building Assume we have a linearly separable data set, e">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-27T01:08:57.000Z">
-<meta property="article:modified_time" content="2024-06-27T01:14:52.441Z">
+<meta property="article:published_time" content="2024-07-02T08:29:11.000Z">
+<meta property="article:modified_time" content="2024-07-02T09:18:32.135Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>&#39;Math&#39; - Hexo</title>
+  <title>Perceptron - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -65,6 +64,10 @@
     <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
 
 
 
@@ -226,7 +229,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="&#39;Math&#39;"></span>
+            <span id="subtitle" data-typed-text="Perceptron"></span>
           
         </div>
 
@@ -237,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-27 09:08" pubdate>
-          June 27, 2024 am
+        <time datetime="2024-07-02 16:29" pubdate>
+          July 2, 2024 pm
         </time>
       </span>
     
@@ -249,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1 words
+          250 words
         
       </span>
     
@@ -305,12 +308,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">&#39;Math&#39;</h1>
+            <h1 id="seo-header">Perceptron</h1>
             
             
               <div class="markdown-body">
                 
-                <p>This is for trying the availablity of writing latex in markdown file</p>
+                <h2 id="introduction">Introduction</h2>
+<p>Perceptron is kind of supervised learning for binary classifier. It
+is an algorithm for learning the threshold function.</p>
+<h2 id="model-building">Model building</h2>
+<p>Assume we have a linearly separable data set, ensuring that the
+algorithm can converge. Our objective is to separate the sample points
+using a hyperplane, whose normal vector is determined by minimizing the
+loss function associated with the misclassified points. It should be
+noted that this solution is not unique. <span class="math display">\[
+\begin{align*}
+\sum_{i=1}^{k+1}i &amp; = \left(\sum_{i=1}^{k}i\right) +(k+1)\\
+&amp; = \frac{k(k+1)}{2}+k+1 &amp; (\text{by inductive hypothesis})\\
+&amp; = \frac{k(k+1)+2(k+1)}{2}\\
+&amp; = \frac{(k+1)(k+2)}{2}\\
+&amp; = \frac{(k+1)((k+1)+1)}{2}.
+\end{align*}
+\]</span></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> topArrow = <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;#scroll-top-button&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (topArrow.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">var</span> board = <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;#board&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (board.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">var</span> arrowUpIcon = <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;#scroll-top-button i&#x27;</span>);<br>    <span class="hljs-keyword">if</span>(arrowUpIcon.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>)&#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125; <br>    <span class="hljs-keyword">var</span> posDisplay = <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">var</span> scrollDisplay = <span class="hljs-literal">false</span>;<br>    <span class="hljs-comment">// Position</span><br>    <span class="hljs-keyword">var</span> setTopArrowPos = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">var</span> boardRight = board[<span class="hljs-number">0</span>].<span class="hljs-title function_">getClientRects</span>()[<span class="hljs-number">0</span>].<span class="hljs-property">right</span>;<br>      <span class="hljs-keyword">var</span> bodyWidth = <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">offsetWidth</span>;<br>      <span class="hljs-keyword">var</span> right = bodyWidth - boardRight;<br>      posDisplay = right &gt;= <span class="hljs-number">50</span>;<br>      topArrow.<span class="hljs-title function_">css</span>(&#123;<br>        <span class="hljs-string">&#x27;bottom&#x27;</span>: scrollDisplay ? <span class="hljs-string">&#x27;20px&#x27;</span> : <span class="hljs-string">&#x27;-60px&#x27;</span>,<br>        <span class="hljs-string">&#x27;right&#x27;</span> : posDisplay ? right - <span class="hljs-number">64</span> : <span class="hljs-number">8</span> + <span class="hljs-string">&#x27;px&#x27;</span>,<br>        <span class="hljs-string">&#x27;min-width&#x27;</span> : posDisplay ? <span class="hljs-number">40</span> : <span class="hljs-number">28</span> + <span class="hljs-string">&#x27;px&#x27;</span>,<br>        <span class="hljs-string">&#x27;min-height&#x27;</span> : posDisplay ? <span class="hljs-number">40</span> : <span class="hljs-number">28</span> + <span class="hljs-string">&#x27;px&#x27;</span><br>      &#125;);<br>      arrowUpIcon.<span class="hljs-title function_">css</span>(&#123;<br>        <span class="hljs-string">&#x27;font-size&#x27;</span> : posDisplay ? <span class="hljs-number">32</span> : <span class="hljs-number">20</span> + <span class="hljs-string">&#x27;px&#x27;</span><br>      &#125;);<br>    &#125;;<br>    <span class="hljs-title function_">setTopArrowPos</span>();<br>    <span class="hljs-title function_">jQuery</span>(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">resize</span>(setTopArrowPos);<br>    <span class="hljs-comment">// Display</span><br>    <span class="hljs-keyword">var</span> headerHeight = board.<span class="hljs-title function_">offset</span>().<span class="hljs-property">top</span>;<br>    <span class="hljs-title class_">Fluid</span>.<span class="hljs-property">utils</span>.<span class="hljs-title function_">listenScroll</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">var</span> scrollHeight = <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">scrollTop</span> + <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">scrollTop</span>;<br>      scrollDisplay = scrollHeight &gt;= headerHeight;<br>      topArrow.<span class="hljs-title function_">css</span>(&#123;<br>        <span class="hljs-string">&#x27;bottom&#x27;</span>: scrollDisplay ? <span class="hljs-string">&#x27;20px&#x27;</span> : <span class="hljs-string">&#x27;-60px&#x27;</span><br>      &#125;);<br>    &#125;);<br>    <span class="hljs-comment">// Click</span><br>    topArrow.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;body,html&#x27;</span>).<span class="hljs-title function_">animate</span>(&#123;<br>        <span class="hljs-attr">scrollTop</span>: <span class="hljs-number">0</span>,<br>        easing   : <span class="hljs-string">&#x27;swing&#x27;</span><br>      &#125;);<br>    &#125;);<br>  &#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -320,13 +340,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Math/" class="print-no-link">#Math</a>
-      
-    </div>
-  
 </div>
 
 
@@ -335,8 +348,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>&#39;Math&#39;</div>
-      <div>http://example.com/2024/06/27/Math/</div>
+      <div>Perceptron</div>
+      <div>http://example.com/2024/07/02/Perceptron/</div>
     </div>
     <div class="license-meta">
       
@@ -348,7 +361,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 27, 2024</div>
+          <div>July 2, 2024</div>
         </div>
       
       
@@ -380,18 +393,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/02/Framework/" title="Framework">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Framework</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/27/First-try/" title="Description For My Blog">
-                        <span class="hidden-mobile">Description For My Blog</span>
+                      <a href="/2024/07/02/Framework/" title="Framework">
+                        <span class="hidden-mobile">Framework</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -411,8 +418,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'http://example.com/2024/06/27/Math/';
-          this.page.identifier = '/2024/06/27/Math/';
+          this.page.url = 'http://example.com/2024/07/02/Perceptron/';
+          this.page.identifier = '/2024/07/02/Perceptron/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -477,6 +484,27 @@
 
   
 
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
 
 
 
@@ -693,6 +721,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

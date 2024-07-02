@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>Framework</title>
-    <link href="/2024/07/02/Framework/"/>
-    <url>/2024/07/02/Framework/</url>
+    <title>Perceptron</title>
+    <link href="/2024/07/02/Perceptron/"/>
+    <url>/2024/07/02/Perceptron/</url>
     
-    <content type="html"><![CDATA[<p>Here is the visualization of  short-term knowledge：</p><p><img src="/img/Framework.png" alt="Framework"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="introduction">Introduction</h2><p>Perceptron is kind of supervised learning for binary classifier. Itis an algorithm for learning the threshold function.</p><h2 id="model-building">Model building</h2><p>Assume we have a linearly separable data set, ensuring that thealgorithm can converge. Our objective is to separate the sample pointsusing a hyperplane, whose normal vector is determined by minimizing theloss function associated with the misclassified points. It should benoted that this solution is not unique. <span class="math display">\[\begin{align*}\sum_{i=1}^{k+1}i &amp; = \left(\sum_{i=1}^{k}i\right) +(k+1)\\&amp; = \frac{k(k+1)}{2}+k+1 &amp; (\text{by inductive hypothesis})\\&amp; = \frac{k(k+1)+2(k+1)}{2}\\&amp; = \frac{(k+1)(k+2)}{2}\\&amp; = \frac{(k+1)((k+1)+1)}{2}.\end{align*}\]</span></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> topArrow = <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;#scroll-top-button&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (topArrow.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">var</span> board = <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;#board&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (board.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">var</span> arrowUpIcon = <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;#scroll-top-button i&#x27;</span>);<br>    <span class="hljs-keyword">if</span>(arrowUpIcon.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>)&#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125; <br>    <span class="hljs-keyword">var</span> posDisplay = <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">var</span> scrollDisplay = <span class="hljs-literal">false</span>;<br>    <span class="hljs-comment">// Position</span><br>    <span class="hljs-keyword">var</span> setTopArrowPos = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">var</span> boardRight = board[<span class="hljs-number">0</span>].<span class="hljs-title function_">getClientRects</span>()[<span class="hljs-number">0</span>].<span class="hljs-property">right</span>;<br>      <span class="hljs-keyword">var</span> bodyWidth = <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">offsetWidth</span>;<br>      <span class="hljs-keyword">var</span> right = bodyWidth - boardRight;<br>      posDisplay = right &gt;= <span class="hljs-number">50</span>;<br>      topArrow.<span class="hljs-title function_">css</span>(&#123;<br>        <span class="hljs-string">&#x27;bottom&#x27;</span>: scrollDisplay ? <span class="hljs-string">&#x27;20px&#x27;</span> : <span class="hljs-string">&#x27;-60px&#x27;</span>,<br>        <span class="hljs-string">&#x27;right&#x27;</span> : posDisplay ? right - <span class="hljs-number">64</span> : <span class="hljs-number">8</span> + <span class="hljs-string">&#x27;px&#x27;</span>,<br>        <span class="hljs-string">&#x27;min-width&#x27;</span> : posDisplay ? <span class="hljs-number">40</span> : <span class="hljs-number">28</span> + <span class="hljs-string">&#x27;px&#x27;</span>,<br>        <span class="hljs-string">&#x27;min-height&#x27;</span> : posDisplay ? <span class="hljs-number">40</span> : <span class="hljs-number">28</span> + <span class="hljs-string">&#x27;px&#x27;</span><br>      &#125;);<br>      arrowUpIcon.<span class="hljs-title function_">css</span>(&#123;<br>        <span class="hljs-string">&#x27;font-size&#x27;</span> : posDisplay ? <span class="hljs-number">32</span> : <span class="hljs-number">20</span> + <span class="hljs-string">&#x27;px&#x27;</span><br>      &#125;);<br>    &#125;;<br>    <span class="hljs-title function_">setTopArrowPos</span>();<br>    <span class="hljs-title function_">jQuery</span>(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">resize</span>(setTopArrowPos);<br>    <span class="hljs-comment">// Display</span><br>    <span class="hljs-keyword">var</span> headerHeight = board.<span class="hljs-title function_">offset</span>().<span class="hljs-property">top</span>;<br>    <span class="hljs-title class_">Fluid</span>.<span class="hljs-property">utils</span>.<span class="hljs-title function_">listenScroll</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">var</span> scrollHeight = <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">scrollTop</span> + <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">scrollTop</span>;<br>      scrollDisplay = scrollHeight &gt;= headerHeight;<br>      topArrow.<span class="hljs-title function_">css</span>(&#123;<br>        <span class="hljs-string">&#x27;bottom&#x27;</span>: scrollDisplay ? <span class="hljs-string">&#x27;20px&#x27;</span> : <span class="hljs-string">&#x27;-60px&#x27;</span><br>      &#125;);<br>    &#125;);<br>    <span class="hljs-comment">// Click</span><br>    topArrow.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-title function_">jQuery</span>(<span class="hljs-string">&#x27;body,html&#x27;</span>).<span class="hljs-title function_">animate</span>(&#123;<br>        <span class="hljs-attr">scrollTop</span>: <span class="hljs-number">0</span>,<br>        easing   : <span class="hljs-string">&#x27;swing&#x27;</span><br>      &#125;);<br>    &#125;);<br>  &#125;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -17,19 +17,13 @@
   
   
   <entry>
-    <title>&#39;Math&#39;</title>
-    <link href="/2024/06/27/Math/"/>
-    <url>/2024/06/27/Math/</url>
+    <title>Framework</title>
+    <link href="/2024/07/02/Framework/"/>
+    <url>/2024/07/02/Framework/</url>
     
-    <content type="html"><![CDATA[<p>This is for trying the availablity of writing latex in markdown file</p>]]></content>
+    <content type="html"><![CDATA[<p>Here is the visualization of short-term knowledge：</p><figure><img src="/img/Framework.png" alt="Framework" /><figcaption aria-hidden="true">Framework</figcaption></figure>]]></content>
     
     
-    
-    <tags>
-      
-      <tag>Math</tag>
-      
-    </tags>
     
   </entry>
   
@@ -40,20 +34,7 @@
     <link href="/2024/06/27/First-try/"/>
     <url>/2024/06/27/First-try/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to my study blog! Here, I’ll be storing notes on various topics, including Machine Learning and Mathematics. As I tend to be a bit lazy, updates might be infrequent. However, I hope to manage it consistently over time.</p><p>– From ShenZhen Bay Laboratory</p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2024/06/27/hello-world/"/>
-    <url>/2024/06/27/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Some useful sources:</p><p>Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Welcome to my study blog! Here, I'll be storing notes on varioustopics, including Machine Learning and Mathematics. As I tend to be abit lazy, updates might be infrequent. However, I hope to manage itconsistently over time.</p><p>-- From ShenZhen Bay Laboratory</p>]]></content>
     
     
     
