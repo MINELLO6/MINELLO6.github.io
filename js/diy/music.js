@@ -1,32 +1,35 @@
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
     fixed: true,
-	autoplay: true, //自动播放
-    audio: [
-	{
-        name: '踊り子',
-        artist: 'Vaundy',
-        url: 'https://lw-sycdn.kuwo.cn/1d593328e2e12b760e2d73371c8e2cca/6684f336/resource/30106/trackmedia/M50000029zVV22uiSW.mp3?bitrate$128&from=vip',
-        cover: 'https://y.qq.com/music/photo_new/T002R300x300M000002vI3qx4I4nHZ_2.jpg?max_age=2592000',
-    }, 
-    {
-        name: 'Not Angry',
-        artist: 'Chris James',
-        url: 'https://lw-sycdn.kuwo.cn/2cb309de38f08fa1b6ae214670c964d1/6684f363/resource/30106/trackmedia/M500002s3IOu1K3ztg.mp3?bitrate$128&from=vip',
-        cover: 'https://p2.music.126.net/8u9G6-hnZZV3HFZxU7RqHw==/109951165528742706.jpg?param=34y34',
-    }, 
-    {
-        name: 'hill that i\'ll die on',
-        artist: 'Jonah Kagen',
-        url: 'https://lw-sycdn.kuwo.cn/6d24e87604bbe86b7ff017033bfded95/6684f8ad/resource/30106/trackmedia/M500000NInng1DPeuY.mp3?bitrate$128&from=vip',
-        cover: 'https://y.qq.com/music/photo_new/T002R300x300M000002WfJcX16BEzQ_1.jpg?max_age=2592000',
-    }, 
-    {
-        name: '普通朋友',
-        artist: '陶喆',
-        url: 'https://lw-sycdn.kuwo.cn/39877e2514deb412cc947d0a250251b1/6684e8cd/resource/30106/trackmedia/M500001trdqY1wcxzH.mp3?bitrate$128&from=vip',
-        cover: 'https://y.qq.com/music/photo_new/T002R300x300M000002PjDkE14OUkV_1.jpg?max_age=2592000',
-    }
-	]
+    autoplay: true, //自动播放
+    lrcType: 3,
+    audio: [{
+            name: '踊り子',
+            artist: 'Vaundy',
+            url: 'https://github.com/MINELLO6/mymusic/blob/main/vaundy.mp3?raw=true',
+            cover: 'https://y.qq.com/music/photo_new/T002R300x300M000002vI3qx4I4nHZ_2.jpg?max_age=2592000',
+            lrc: 'https://github.com/MINELLO6/mymusic/blob/main/踊り子-Vaundy.lrc'
+        },
+        {
+            name: 'Not Angry',
+            artist: 'Chris James',
+            url: 'https://github.com/MINELLO6/mymusic/blob/main/Not Angry.mp3?raw=true',
+            cover: 'https://p2.music.126.net/8u9G6-hnZZV3HFZxU7RqHw==/109951165528742706.jpg?param=34y34',
+            lrc: 'https://github.com/MINELLO6/mymusic/blob/main/Not+Angry-Chris+James.lrc'
+        },
+        {
+            name: 'hill that i\'ll die on',
+            artist: 'Jonah Kagen',
+            url: 'https://github.com/MINELLO6/mymusic/blob/main/hill that i will die one.mp3?raw=true',
+            cover: 'https://y.qq.com/music/photo_new/T002R300x300M000002WfJcX16BEzQ_1.jpg?max_age=2592000',
+            lrc: 'https://github.com/MINELLO6/mymusic/blob/main/hill+that+ill+die+on-Jonah+Kagen.lrc'
+        },
+        {
+            name: '普通朋友',
+            artist: '陶喆',
+            url: 'https://github.com/MINELLO6/mymusic/blob/main/普通朋友.mp3?raw=true',
+            cover: 'https://y.qq.com/music/photo_new/T002R300x300M000002PjDkE14OUkV_1.jpg?max_age=2592000',
+            lrc: 'https://github.com/MINELLO6/mymusic/blob/main/普通朋友-陶喆.lrc'
+        }
+    ]
 });
-
