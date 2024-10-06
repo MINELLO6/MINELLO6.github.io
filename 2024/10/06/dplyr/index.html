@@ -1,0 +1,817 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Reference: documentation: https:&#x2F;&#x2F;dplyr.tidyverse.org&#x2F;articles&#x2F;dplyr.html cheatsheets: https:&#x2F;&#x2F;github.com&#x2F;rstudio&#x2F;cheatsheets&#x2F;blob&#x2F;main&#x2F;data-transformation.pdf Load packages 12345# Install dplyr i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dplyr">
+<meta property="og:url" content="http://example.com/2024/10/06/dplyr/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Reference: documentation: https:&#x2F;&#x2F;dplyr.tidyverse.org&#x2F;articles&#x2F;dplyr.html cheatsheets: https:&#x2F;&#x2F;github.com&#x2F;rstudio&#x2F;cheatsheets&#x2F;blob&#x2F;main&#x2F;data-transformation.pdf Load packages 12345# Install dplyr i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-06T13:00:58.000Z">
+<meta property="article:modified_time" content="2024-10-06T13:07:30.552Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Packages">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>dplyr - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Happy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="dplyr"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-06 14:00" pubdate>
+          October 6, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">dplyr</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="reference">Reference:</h2>
+<p>documentation: <a
+target="_blank" rel="noopener" href="https://dplyr.tidyverse.org/articles/dplyr.html"
+class="uri">https://dplyr.tidyverse.org/articles/dplyr.html</a></p>
+<p>cheatsheets: <a
+target="_blank" rel="noopener" href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf"
+class="uri">https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf</a></p>
+<h2 id="load-packages">Load packages</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment"># Install dplyr if not exist</span><br><span class="hljs-keyword">if</span> <span class="hljs-punctuation">(</span><span class="hljs-operator">!</span>require<span class="hljs-punctuation">(</span>dplyr<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-punctuation">&#123;</span> <br>  install.packages<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;dplyr&quot;</span><span class="hljs-punctuation">)</span><br>  library<span class="hljs-punctuation">(</span>dplyr<span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<h2 id="data-statwars">Data: statwars</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment"># dimension, col names and few rows to display</span><br><span class="hljs-built_in">dim</span><span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## [1] 87 14</span><br><br><span class="hljs-built_in">names</span><span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">##  [1] &quot;name&quot;       &quot;height&quot;     &quot;mass&quot;       &quot;hair_color&quot; &quot;skin_color&quot;</span><br><span class="hljs-comment">##  [6] &quot;eye_color&quot;  &quot;birth_year&quot; &quot;sex&quot;        &quot;gender&quot;     &quot;homeworld&quot; </span><br><span class="hljs-comment">## [11] &quot;species&quot;    &quot;films&quot;      &quot;vehicles&quot;   &quot;starships&quot;</span><br><br>head<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">)</span> <span class="hljs-comment"># a tibble</span><br><br><span class="hljs-comment">## # A tibble: 6 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…</span><br><span class="hljs-comment">## 2 C-3PO        167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…</span><br><span class="hljs-comment">## 3 R2-D2         96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…</span><br><span class="hljs-comment">## 4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…</span><br><span class="hljs-comment">## 5 Leia Org…    150    49 brown      light      brown           19   fema… femin…</span><br><span class="hljs-comment">## 6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="the-pipe">The pipe</h2>
+<p>The first argument of all dplyr functions is a data frame or tibble.
+Dplyr uses the operator from magrittr which turns <em>x</em> into
+<em>f</em>(<em>x</em>, <em>y</em>). The hot key for it is ctrl + shift +
+M.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs R">library<span class="hljs-punctuation">(</span>magrittr<span class="hljs-punctuation">)</span><br><br>result <span class="hljs-operator">&lt;-</span> 1<span class="hljs-operator">:</span><span class="hljs-number">10</span> <span class="hljs-operator">%&gt;%</span><br>  <span class="hljs-built_in">sum</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  <span class="hljs-built_in">sqrt</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<h2 id="filter-select-a-subset-of-rows-in-a-data-frame.">filter():
+select a subset of rows in a data frame.</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><code class="hljs R">starwars <span class="hljs-operator">%&gt;%</span> filter<span class="hljs-punctuation">(</span>skin_color <span class="hljs-operator">==</span> <span class="hljs-string">&quot;light&quot;</span><span class="hljs-punctuation">,</span> eye_color <span class="hljs-operator">==</span><span class="hljs-string">&quot;brown&quot;</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 7 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 Leia Org…    150    49 brown      light      brown             19 fema… femin…</span><br><span class="hljs-comment">## 2 Biggs Da…    183    84 black      light      brown             24 male  mascu…</span><br><span class="hljs-comment">## 3 Padmé Am…    185    45 brown      light      brown             46 fema… femin…</span><br><span class="hljs-comment">## 4 Cordé        157    NA brown      light      brown             NA &lt;NA&gt;  &lt;NA&gt;  </span><br><span class="hljs-comment">## 5 Dormé        165    NA brown      light      brown             NA fema… femin…</span><br><span class="hljs-comment">## 6 Raymus A…    188    79 brown      light      brown             NA male  mascu…</span><br><span class="hljs-comment">## 7 Poe Dame…     NA    NA brown      light      brown             NA male  mascu…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># starwars[starwars$skin_color == &quot;light&quot; &amp; starwars$eye_color == &quot;brown&quot;, ]</span><br><br>mtcars <span class="hljs-operator">%&gt;%</span> filter<span class="hljs-punctuation">(</span>mpg <span class="hljs-operator">&gt;</span> <span class="hljs-number">20</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span><br><span class="hljs-comment">## Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span><br><span class="hljs-comment">## Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span><br><span class="hljs-comment">## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span><br><span class="hljs-comment">## Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span><br><span class="hljs-comment">## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span><br><span class="hljs-comment">## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span><br><span class="hljs-comment">## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span><br><span class="hljs-comment">## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span><br><span class="hljs-comment">## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span><br><span class="hljs-comment">## Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span><br><span class="hljs-comment">## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span><br><span class="hljs-comment">## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span><br><span class="hljs-comment">## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span><br><span class="hljs-comment">## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span><br><br>mtcars <span class="hljs-operator">%&gt;%</span> filter<span class="hljs-punctuation">(</span>mpg <span class="hljs-operator">&gt;</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span> cyl <span class="hljs-operator">==</span> <span class="hljs-number">4</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span><br><span class="hljs-comment">## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span><br><span class="hljs-comment">## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span><br><span class="hljs-comment">## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span><br><span class="hljs-comment">## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span><br><span class="hljs-comment">## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span><br><span class="hljs-comment">## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span><br><span class="hljs-comment">## Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span><br><span class="hljs-comment">## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span><br><span class="hljs-comment">## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span><br><span class="hljs-comment">## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span><br><span class="hljs-comment">## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span><br><br>mtcars <span class="hljs-operator">%&gt;%</span> filter<span class="hljs-punctuation">(</span>cyl <span class="hljs-operator">%in%</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">6</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># filter the row with cyl equals to 4 or 6</span><br><br><span class="hljs-comment">##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span><br><span class="hljs-comment">## Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span><br><span class="hljs-comment">## Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span><br><span class="hljs-comment">## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span><br><span class="hljs-comment">## Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span><br><span class="hljs-comment">## Valiant        18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1</span><br><span class="hljs-comment">## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span><br><span class="hljs-comment">## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span><br><span class="hljs-comment">## Merc 280       19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</span><br><span class="hljs-comment">## Merc 280C      17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4</span><br><span class="hljs-comment">## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span><br><span class="hljs-comment">## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span><br><span class="hljs-comment">## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span><br><span class="hljs-comment">## Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span><br><span class="hljs-comment">## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span><br><span class="hljs-comment">## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span><br><span class="hljs-comment">## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span><br><span class="hljs-comment">## Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</span><br><span class="hljs-comment">## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span><br><br>mtcars <span class="hljs-operator">%&gt;%</span> filter<span class="hljs-punctuation">(</span>mpg <span class="hljs-operator">&gt;</span> <span class="hljs-number">20</span> <span class="hljs-operator">|</span> cyl <span class="hljs-operator">==</span> <span class="hljs-number">4</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># equivalent to or</span><br><br><span class="hljs-comment">##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span><br><span class="hljs-comment">## Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span><br><span class="hljs-comment">## Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span><br><span class="hljs-comment">## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span><br><span class="hljs-comment">## Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span><br><span class="hljs-comment">## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span><br><span class="hljs-comment">## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span><br><span class="hljs-comment">## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span><br><span class="hljs-comment">## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span><br><span class="hljs-comment">## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span><br><span class="hljs-comment">## Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span><br><span class="hljs-comment">## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span><br><span class="hljs-comment">## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span><br><span class="hljs-comment">## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span><br><span class="hljs-comment">## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span><br><br>mtcars <span class="hljs-operator">%&gt;%</span>filter<span class="hljs-punctuation">(</span><span class="hljs-operator">!</span><span class="hljs-built_in">is.na</span><span class="hljs-punctuation">(</span>mpg<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span><br><span class="hljs-comment">## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span><br><span class="hljs-comment">## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span><br><span class="hljs-comment">## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span><br><span class="hljs-comment">## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span><br><span class="hljs-comment">## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2</span><br><span class="hljs-comment">## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1</span><br><span class="hljs-comment">## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4</span><br><span class="hljs-comment">## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span><br><span class="hljs-comment">## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span><br><span class="hljs-comment">## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</span><br><span class="hljs-comment">## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4</span><br><span class="hljs-comment">## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3</span><br><span class="hljs-comment">## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3</span><br><span class="hljs-comment">## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3</span><br><span class="hljs-comment">## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4</span><br><span class="hljs-comment">## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4</span><br><span class="hljs-comment">## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4</span><br><span class="hljs-comment">## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span><br><span class="hljs-comment">## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span><br><span class="hljs-comment">## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span><br><span class="hljs-comment">## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span><br><span class="hljs-comment">## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2</span><br><span class="hljs-comment">## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2</span><br><span class="hljs-comment">## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4</span><br><span class="hljs-comment">## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2</span><br><span class="hljs-comment">## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span><br><span class="hljs-comment">## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span><br><span class="hljs-comment">## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span><br><span class="hljs-comment">## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4</span><br><span class="hljs-comment">## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</span><br><span class="hljs-comment">## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</span><br><span class="hljs-comment">## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span><br></code></pre></td></tr></table></figure>
+<h2 id="arrange-reorder-the-rows">arrange(): reorder the rows</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs R">starwars <span class="hljs-operator">%&gt;%</span> arrange<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> mass<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 14</span><br><span class="hljs-comment">##    name     height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">##  1 Yoda         66    17 white      green      brown            896 male  mascu…</span><br><span class="hljs-comment">##  2 Ratts T…     79    15 none       grey, blue unknown           NA male  mascu…</span><br><span class="hljs-comment">##  3 Wicket …     88    20 brown      brown      brown              8 male  mascu…</span><br><span class="hljs-comment">##  4 Dud Bolt     94    45 none       blue, grey yellow            NA male  mascu…</span><br><span class="hljs-comment">##  5 R2-D2        96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…</span><br><span class="hljs-comment">##  6 R4-P17       96    NA none       silver, r… red, blue         NA none  femin…</span><br><span class="hljs-comment">##  7 R5-D4        97    32 &lt;NA&gt;       white, red red               NA none  mascu…</span><br><span class="hljs-comment">##  8 Sebulba     112    40 none       grey, red  orange            NA male  mascu…</span><br><span class="hljs-comment">##  9 Gasgano     122    NA none       white, bl… black             NA male  mascu…</span><br><span class="hljs-comment">## 10 Watto       137    NA black      blue, grey yellow            NA male  mascu…</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># desc(): order a column in descending order</span><br>starwars <span class="hljs-operator">%&gt;%</span> arrange<span class="hljs-punctuation">(</span>desc<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> mass<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 14</span><br><span class="hljs-comment">##    name     height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">##  1 Yarael …    264    NA none       white      yellow          NA   male  mascu…</span><br><span class="hljs-comment">##  2 Tarfful     234   136 brown      brown      blue            NA   male  mascu…</span><br><span class="hljs-comment">##  3 Lama Su     229    88 none       grey       black           NA   male  mascu…</span><br><span class="hljs-comment">##  4 Chewbac…    228   112 brown      unknown    blue           200   male  mascu…</span><br><span class="hljs-comment">##  5 Roos Ta…    224    82 none       grey       orange          NA   male  mascu…</span><br><span class="hljs-comment">##  6 Grievous    216   159 none       brown, wh… green, y…       NA   male  mascu…</span><br><span class="hljs-comment">##  7 Taun We     213    NA none       grey       black           NA   fema… femin…</span><br><span class="hljs-comment">##  8 Tion Me…    206    80 none       grey       black           NA   male  mascu…</span><br><span class="hljs-comment">##  9 Rugor N…    206    NA none       green      orange          NA   male  mascu…</span><br><span class="hljs-comment">## 10 Darth V…    202   136 none       white      yellow          41.9 male  mascu…</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="slice-index-rows-by-integer-locations">slice(): index rows by
+integer locations</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs R">starwars <span class="hljs-operator">%&gt;%</span> slice<span class="hljs-punctuation">(</span><span class="hljs-number">5</span><span class="hljs-operator">:</span><span class="hljs-number">10</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 6 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 Leia Org…    150    49 brown      light      brown             19 fema… femin…</span><br><span class="hljs-comment">## 2 Owen Lars    178   120 brown, gr… light      blue              52 male  mascu…</span><br><span class="hljs-comment">## 3 Beru Whi…    165    75 brown      light      blue              47 fema… femin…</span><br><span class="hljs-comment">## 4 R5-D4         97    32 &lt;NA&gt;       white, red red               NA none  mascu…</span><br><span class="hljs-comment">## 5 Biggs Da…    183    84 black      light      brown             24 male  mascu…</span><br><span class="hljs-comment">## 6 Obi-Wan …    182    77 auburn, w… fair       blue-gray         57 male  mascu…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># slice_head()/slice_tail(): select the first or last rows</span><br>starwars <span class="hljs-operator">%&gt;%</span> slice_head<span class="hljs-punctuation">(</span>n <span class="hljs-operator">=</span> <span class="hljs-number">3</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 3 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 Luke Sky…    172    77 blond      fair       blue              19 male  mascu…</span><br><span class="hljs-comment">## 2 C-3PO        167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…</span><br><span class="hljs-comment">## 3 R2-D2         96    32 &lt;NA&gt;       white, bl… red               33 none  mascu…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># slice_sample(): randomly select rows</span><br>starwars <span class="hljs-operator">%&gt;%</span> slice_sample<span class="hljs-punctuation">(</span>n <span class="hljs-operator">=</span> <span class="hljs-number">5</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 5 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 San Hill     191  NA   none       grey       gold              NA male  mascu…</span><br><span class="hljs-comment">## 2 Qui-Gon …    193  89   brown      fair       blue              92 male  mascu…</span><br><span class="hljs-comment">## 3 Ratts Ty…     79  15   none       grey, blue unknown           NA male  mascu…</span><br><span class="hljs-comment">## 4 Luminara…    170  56.2 black      yellow     blue              58 fema… femin…</span><br><span class="hljs-comment">## 5 Beru Whi…    165  75   brown      light      blue              47 fema… femin…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br>starwars <span class="hljs-operator">%&gt;%</span> slice_sample<span class="hljs-punctuation">(</span>prop <span class="hljs-operator">=</span> <span class="hljs-number">0.1</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># prop-choose a certain proportion of the cases</span><br><br><span class="hljs-comment">## # A tibble: 8 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 R5-D4         97    32 &lt;NA&gt;       white, red red               NA none  mascu…</span><br><span class="hljs-comment">## 2 Owen Lars    178   120 brown, gr… light      blue              52 male  mascu…</span><br><span class="hljs-comment">## 3 Watto        137    NA black      blue, grey yellow            NA male  mascu…</span><br><span class="hljs-comment">## 4 Luke Sky…    172    77 blond      fair       blue              19 male  mascu…</span><br><span class="hljs-comment">## 5 Leia Org…    150    49 brown      light      brown             19 fema… femin…</span><br><span class="hljs-comment">## 6 Arvel Cr…     NA    NA brown      fair       brown             NA male  mascu…</span><br><span class="hljs-comment">## 7 BB8           NA    NA none       none       black             NA none  mascu…</span><br><span class="hljs-comment">## 8 Gregar T…    185    85 black      dark       brown             NA &lt;NA&gt;  &lt;NA&gt;  </span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br>starwars <span class="hljs-operator">%&gt;%</span> slice_sample<span class="hljs-punctuation">(</span>n <span class="hljs-operator">=</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span> replace <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># replace  = TRUE-perform a bootstrap sample</span><br><br><span class="hljs-comment">## # A tibble: 5 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 Shaak Ti     178    57 none       red, blue… black             NA fema… femin…</span><br><span class="hljs-comment">## 2 Rey           NA    NA brown      light      hazel             NA fema… femin…</span><br><span class="hljs-comment">## 3 Jek Tono…    180   110 brown      fair       blue              NA &lt;NA&gt;  &lt;NA&gt;  </span><br><span class="hljs-comment">## 4 Ric Olié     183    NA brown      fair       blue              NA male  mascu…</span><br><span class="hljs-comment">## 5 Nien Nunb    160    68 none       grey       black             NA male  mascu…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># weights &lt;- starwars %&gt;% nrow() %&gt;% runif()</span><br><span class="hljs-comment"># weights</span><br><br><span class="hljs-comment"># slice_min(), slice_max(): select rwos with highest or lowest values of a variable. First, we should assure the chosen vavlues are not NA</span><br>starwars <span class="hljs-operator">%&gt;%</span> filter<span class="hljs-punctuation">(</span><span class="hljs-operator">!</span><span class="hljs-built_in">is.na</span><span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span> slice_max<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> n <span class="hljs-operator">=</span> <span class="hljs-number">3</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 3 × 14</span><br><span class="hljs-comment">##   name      height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">## 1 Yarael P…    264    NA none       white      yellow            NA male  mascu…</span><br><span class="hljs-comment">## 2 Tarfful      234   136 brown      brown      blue              NA male  mascu…</span><br><span class="hljs-comment">## 3 Lama Su      229    88 none       grey       black             NA male  mascu…</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br></code></pre></td></tr></table></figure>
+<h2
+id="select-used-to-zoom-in-on-a-useful-subset-of-a-large-datasets">select():
+used to zoom in on a useful subset of a large datasets</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br></pre></td><td class="code"><pre><code class="hljs R">starwars <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>hair_color<span class="hljs-punctuation">,</span> skin_color<span class="hljs-punctuation">,</span> eye_color<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 3</span><br><span class="hljs-comment">##    hair_color    skin_color  eye_color</span><br><span class="hljs-comment">##    &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;    </span><br><span class="hljs-comment">##  1 blond         fair        blue     </span><br><span class="hljs-comment">##  2 &lt;NA&gt;          gold        yellow   </span><br><span class="hljs-comment">##  3 &lt;NA&gt;          white, blue red      </span><br><span class="hljs-comment">##  4 none          white       yellow   </span><br><span class="hljs-comment">##  5 brown         light       brown    </span><br><span class="hljs-comment">##  6 brown, grey   light       blue     </span><br><span class="hljs-comment">##  7 brown         light       blue     </span><br><span class="hljs-comment">##  8 &lt;NA&gt;          white, red  red      </span><br><span class="hljs-comment">##  9 black         light       brown    </span><br><span class="hljs-comment">## 10 auburn, white fair        blue-gray</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br>starwars <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>hair_color<span class="hljs-operator">:</span>eye_color<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 3</span><br><span class="hljs-comment">##    hair_color    skin_color  eye_color</span><br><span class="hljs-comment">##    &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;    </span><br><span class="hljs-comment">##  1 blond         fair        blue     </span><br><span class="hljs-comment">##  2 &lt;NA&gt;          gold        yellow   </span><br><span class="hljs-comment">##  3 &lt;NA&gt;          white, blue red      </span><br><span class="hljs-comment">##  4 none          white       yellow   </span><br><span class="hljs-comment">##  5 brown         light       brown    </span><br><span class="hljs-comment">##  6 brown, grey   light       blue     </span><br><span class="hljs-comment">##  7 brown         light       blue     </span><br><span class="hljs-comment">##  8 &lt;NA&gt;          white, red  red      </span><br><span class="hljs-comment">##  9 black         light       brown    </span><br><span class="hljs-comment">## 10 auburn, white fair        blue-gray</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-comment"># select all cols except those from hair_color to eye_color</span><br>starwars <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span><span class="hljs-operator">!</span><span class="hljs-punctuation">(</span>hair_color<span class="hljs-operator">:</span>eye_color<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 11</span><br><span class="hljs-comment">##    name    height  mass birth_year sex   gender homeworld species films vehicles</span><br><span class="hljs-comment">##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;lis&gt; &lt;list&gt;  </span><br><span class="hljs-comment">##  1 Luke S…    172    77       19   male  mascu… Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  2 C-3PO      167    75      112   none  mascu… Tatooine  Droid   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  3 R2-D2       96    32       33   none  mascu… Naboo     Droid   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  4 Darth …    202   136       41.9 male  mascu… Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  5 Leia O…    150    49       19   fema… femin… Alderaan  Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  6 Owen L…    178   120       52   male  mascu… Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  7 Beru W…    165    75       47   fema… femin… Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  8 R5-D4       97    32       NA   none  mascu… Tatooine  Droid   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">##  9 Biggs …    183    84       24   male  mascu… Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">## 10 Obi-Wa…    182    77       57   male  mascu… Stewjon   Human   &lt;chr&gt; &lt;chr&gt;   </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 1 more variable: starships &lt;list&gt;</span><br><br><span class="hljs-comment"># select all cols ending with color</span><br>starwars <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>ends_with<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;color&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 3</span><br><span class="hljs-comment">##    hair_color    skin_color  eye_color</span><br><span class="hljs-comment">##    &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;    </span><br><span class="hljs-comment">##  1 blond         fair        blue     </span><br><span class="hljs-comment">##  2 &lt;NA&gt;          gold        yellow   </span><br><span class="hljs-comment">##  3 &lt;NA&gt;          white, blue red      </span><br><span class="hljs-comment">##  4 none          white       yellow   </span><br><span class="hljs-comment">##  5 brown         light       brown    </span><br><span class="hljs-comment">##  6 brown, grey   light       blue     </span><br><span class="hljs-comment">##  7 brown         light       blue     </span><br><span class="hljs-comment">##  8 &lt;NA&gt;          white, red  red      </span><br><span class="hljs-comment">##  9 black         light       brown    </span><br><span class="hljs-comment">## 10 auburn, white fair        blue-gray</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-keyword">if</span> <span class="hljs-punctuation">(</span><span class="hljs-operator">!</span>require<span class="hljs-punctuation">(</span>dplyr<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-punctuation">&#123;</span><br>  install.packages<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;dplyr&quot;</span><span class="hljs-punctuation">)</span><br>  library<span class="hljs-punctuation">(</span>dplyr<span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">&#125;</span><br><br><span class="hljs-comment"># print(iris)</span><br>iris <span class="hljs-operator">&lt;-</span>  as_tibble<span class="hljs-punctuation">(</span>iris<span class="hljs-punctuation">)</span> <span class="hljs-comment"># for better printing</span><br><span class="hljs-comment"># print(iris)</span><br>print<span class="hljs-punctuation">(</span><span class="hljs-built_in">names</span><span class="hljs-punctuation">(</span>iris<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;</span><br><br>iris <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>starts_with<span class="hljs-punctuation">(</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;Sepal&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 150 × 2</span><br><span class="hljs-comment">##    Sepal.Length Sepal.Width</span><br><span class="hljs-comment">##           &lt;dbl&gt;       &lt;dbl&gt;</span><br><span class="hljs-comment">##  1          5.1         3.5</span><br><span class="hljs-comment">##  2          4.9         3  </span><br><span class="hljs-comment">##  3          4.7         3.2</span><br><span class="hljs-comment">##  4          4.6         3.1</span><br><span class="hljs-comment">##  5          5           3.6</span><br><span class="hljs-comment">##  6          5.4         3.9</span><br><span class="hljs-comment">##  7          4.6         3.4</span><br><span class="hljs-comment">##  8          5           3.4</span><br><span class="hljs-comment">##  9          4.4         2.9</span><br><span class="hljs-comment">## 10          4.9         3.1</span><br><span class="hljs-comment">## # ℹ 140 more rows</span><br><br>iris <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>ends_with<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;Width&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 150 × 2</span><br><span class="hljs-comment">##    Sepal.Width Petal.Width</span><br><span class="hljs-comment">##          &lt;dbl&gt;       &lt;dbl&gt;</span><br><span class="hljs-comment">##  1         3.5         0.2</span><br><span class="hljs-comment">##  2         3           0.2</span><br><span class="hljs-comment">##  3         3.2         0.2</span><br><span class="hljs-comment">##  4         3.1         0.2</span><br><span class="hljs-comment">##  5         3.6         0.2</span><br><span class="hljs-comment">##  6         3.9         0.4</span><br><span class="hljs-comment">##  7         3.4         0.3</span><br><span class="hljs-comment">##  8         3.4         0.2</span><br><span class="hljs-comment">##  9         2.9         0.2</span><br><span class="hljs-comment">## 10         3.1         0.1</span><br><span class="hljs-comment">## # ℹ 140 more rows</span><br><br><span class="hljs-comment"># apply multiple preflixes or suffixes</span><br>iris <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>starts_with<span class="hljs-punctuation">(</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;Sepal&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Petal&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 150 × 4</span><br><span class="hljs-comment">##    Sepal.Length Sepal.Width Petal.Length Petal.Width</span><br><span class="hljs-comment">##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span><br><span class="hljs-comment">##  1          5.1         3.5          1.4         0.2</span><br><span class="hljs-comment">##  2          4.9         3            1.4         0.2</span><br><span class="hljs-comment">##  3          4.7         3.2          1.3         0.2</span><br><span class="hljs-comment">##  4          4.6         3.1          1.5         0.2</span><br><span class="hljs-comment">##  5          5           3.6          1.4         0.2</span><br><span class="hljs-comment">##  6          5.4         3.9          1.7         0.4</span><br><span class="hljs-comment">##  7          4.6         3.4          1.4         0.3</span><br><span class="hljs-comment">##  8          5           3.4          1.5         0.2</span><br><span class="hljs-comment">##  9          4.4         2.9          1.4         0.2</span><br><span class="hljs-comment">## 10          4.9         3.1          1.5         0.1</span><br><span class="hljs-comment">## # ℹ 140 more rows</span><br><br>iris <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>ends_with<span class="hljs-punctuation">(</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;Width&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Length&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 150 × 4</span><br><span class="hljs-comment">##    Sepal.Width Petal.Width Sepal.Length Petal.Length</span><br><span class="hljs-comment">##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;</span><br><span class="hljs-comment">##  1         3.5         0.2          5.1          1.4</span><br><span class="hljs-comment">##  2         3           0.2          4.9          1.4</span><br><span class="hljs-comment">##  3         3.2         0.2          4.7          1.3</span><br><span class="hljs-comment">##  4         3.1         0.2          4.6          1.5</span><br><span class="hljs-comment">##  5         3.6         0.2          5            1.4</span><br><span class="hljs-comment">##  6         3.9         0.4          5.4          1.7</span><br><span class="hljs-comment">##  7         3.4         0.3          4.6          1.4</span><br><span class="hljs-comment">##  8         3.4         0.2          5            1.5</span><br><span class="hljs-comment">##  9         2.9         0.2          4.4          1.4</span><br><span class="hljs-comment">## 10         3.1         0.1          4.9          1.5</span><br><span class="hljs-comment">## # ℹ 140 more rows</span><br><br><span class="hljs-comment"># contains(): select cols whose names contain a word</span><br>iris <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>contains<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;al&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 150 × 4</span><br><span class="hljs-comment">##    Sepal.Length Sepal.Width Petal.Length Petal.Width</span><br><span class="hljs-comment">##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span><br><span class="hljs-comment">##  1          5.1         3.5          1.4         0.2</span><br><span class="hljs-comment">##  2          4.9         3            1.4         0.2</span><br><span class="hljs-comment">##  3          4.7         3.2          1.3         0.2</span><br><span class="hljs-comment">##  4          4.6         3.1          1.5         0.2</span><br><span class="hljs-comment">##  5          5           3.6          1.4         0.2</span><br><span class="hljs-comment">##  6          5.4         3.9          1.7         0.4</span><br><span class="hljs-comment">##  7          4.6         3.4          1.4         0.3</span><br><span class="hljs-comment">##  8          5           3.4          1.5         0.2</span><br><span class="hljs-comment">##  9          4.4         2.9          1.4         0.2</span><br><span class="hljs-comment">## 10          4.9         3.1          1.5         0.1</span><br><span class="hljs-comment">## # ℹ 140 more rows</span><br><br><span class="hljs-comment"># matches(): use regular expression to select</span><br>iris <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>matches<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;[pt]al&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># pal/tal</span><br><br><span class="hljs-comment">## # A tibble: 150 × 4</span><br><span class="hljs-comment">##    Sepal.Length Sepal.Width Petal.Length Petal.Width</span><br><span class="hljs-comment">##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span><br><span class="hljs-comment">##  1          5.1         3.5          1.4         0.2</span><br><span class="hljs-comment">##  2          4.9         3            1.4         0.2</span><br><span class="hljs-comment">##  3          4.7         3.2          1.3         0.2</span><br><span class="hljs-comment">##  4          4.6         3.1          1.5         0.2</span><br><span class="hljs-comment">##  5          5           3.6          1.4         0.2</span><br><span class="hljs-comment">##  6          5.4         3.9          1.7         0.4</span><br><span class="hljs-comment">##  7          4.6         3.4          1.4         0.3</span><br><span class="hljs-comment">##  8          5           3.4          1.5         0.2</span><br><span class="hljs-comment">##  9          4.4         2.9          1.4         0.2</span><br><span class="hljs-comment">## 10          4.9         3.1          1.5         0.1</span><br><span class="hljs-comment">## # ℹ 140 more rows</span><br><br><span class="hljs-comment"># Rename variables with select</span><br>starwars <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>home_world <span class="hljs-operator">=</span> homeworld<span class="hljs-punctuation">)</span> <span class="hljs-comment"># drops all the variables not explicitly mentioned</span><br><br><span class="hljs-comment">## # A tibble: 87 × 1</span><br><span class="hljs-comment">##    home_world</span><br><span class="hljs-comment">##    &lt;chr&gt;     </span><br><span class="hljs-comment">##  1 Tatooine  </span><br><span class="hljs-comment">##  2 Tatooine  </span><br><span class="hljs-comment">##  3 Naboo     </span><br><span class="hljs-comment">##  4 Tatooine  </span><br><span class="hljs-comment">##  5 Alderaan  </span><br><span class="hljs-comment">##  6 Tatooine  </span><br><span class="hljs-comment">##  7 Tatooine  </span><br><span class="hljs-comment">##  8 Tatooine  </span><br><span class="hljs-comment">##  9 Tatooine  </span><br><span class="hljs-comment">## 10 Stewjon   </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br>starwars <span class="hljs-operator">%&gt;%</span> rename<span class="hljs-punctuation">(</span>home_world <span class="hljs-operator">=</span> homeworld<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 14</span><br><span class="hljs-comment">##    name     height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…</span><br><span class="hljs-comment">##  2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…</span><br><span class="hljs-comment">##  3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…</span><br><span class="hljs-comment">##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…</span><br><span class="hljs-comment">##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…</span><br><span class="hljs-comment">##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…</span><br><span class="hljs-comment">##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…</span><br><span class="hljs-comment">##  8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…</span><br><span class="hljs-comment">##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…</span><br><span class="hljs-comment">## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 5 more variables: home_world &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># Select a range of number-prefix in select by num_rage</span><br>library<span class="hljs-punctuation">(</span>tidyr<span class="hljs-punctuation">)</span><br>billboard <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>num_range<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;wk&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-number">10</span><span class="hljs-operator">:</span><span class="hljs-number">15</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 317 × 6</span><br><span class="hljs-comment">##     wk10  wk11  wk12  wk13  wk14  wk15</span><br><span class="hljs-comment">##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="hljs-comment">##  1    NA    NA    NA    NA    NA    NA</span><br><span class="hljs-comment">##  2    NA    NA    NA    NA    NA    NA</span><br><span class="hljs-comment">##  3    51    51    51    47    44    38</span><br><span class="hljs-comment">##  4    61    61    59    61    66    72</span><br><span class="hljs-comment">##  5    57    64    70    75    76    78</span><br><span class="hljs-comment">##  6     6     7    22    29    36    47</span><br><span class="hljs-comment">##  7    NA    NA    NA    NA    NA    NA</span><br><span class="hljs-comment">##  8    36    37    37    38    49    61</span><br><span class="hljs-comment">##  9    10     9     8     6     1     2</span><br><span class="hljs-comment">## 10    59    66    68    61    67    59</span><br><span class="hljs-comment">## # ℹ 307 more rows</span><br></code></pre></td></tr></table></figure>
+<h2
+id="mutate-add-new-columns-that-are-functions-of-existing-columns">mutate():
+add new columns that are functions of existing columns</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs R">starwars <span class="hljs-operator">%&gt;%</span> mutate<span class="hljs-punctuation">(</span>height_m <span class="hljs-operator">=</span> height<span class="hljs-operator">/</span><span class="hljs-number">100</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 15</span><br><span class="hljs-comment">##    name     height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…</span><br><span class="hljs-comment">##  2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…</span><br><span class="hljs-comment">##  3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…</span><br><span class="hljs-comment">##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…</span><br><span class="hljs-comment">##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…</span><br><span class="hljs-comment">##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…</span><br><span class="hljs-comment">##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…</span><br><span class="hljs-comment">##  8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…</span><br><span class="hljs-comment">##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…</span><br><span class="hljs-comment">## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 6 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;, height_m &lt;dbl&gt;</span><br><br><span class="hljs-comment"># see the changed things in the tibble</span><br>starwars <span class="hljs-operator">%&gt;%</span> <br>  mutate<span class="hljs-punctuation">(</span>height_m <span class="hljs-operator">=</span> height<span class="hljs-operator">/</span><span class="hljs-number">100</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  select<span class="hljs-punctuation">(</span>height_m<span class="hljs-punctuation">,</span> height<span class="hljs-punctuation">,</span> everything<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># *** everything() used to show the remaining cols and preserve their original order</span><br><br><span class="hljs-comment">## # A tibble: 87 × 15</span><br><span class="hljs-comment">##    height_m height name    mass hair_color skin_color eye_color birth_year sex  </span><br><span class="hljs-comment">##       &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;</span><br><span class="hljs-comment">##  1     1.72    172 Luke …    77 blond      fair       blue            19   male </span><br><span class="hljs-comment">##  2     1.67    167 C-3PO     75 &lt;NA&gt;       gold       yellow         112   none </span><br><span class="hljs-comment">##  3     0.96     96 R2-D2     32 &lt;NA&gt;       white, bl… red             33   none </span><br><span class="hljs-comment">##  4     2.02    202 Darth…   136 none       white      yellow          41.9 male </span><br><span class="hljs-comment">##  5     1.5     150 Leia …    49 brown      light      brown           19   fema…</span><br><span class="hljs-comment">##  6     1.78    178 Owen …   120 brown, gr… light      blue            52   male </span><br><span class="hljs-comment">##  7     1.65    165 Beru …    75 brown      light      blue            47   fema…</span><br><span class="hljs-comment">##  8     0.97     97 R5-D4     32 &lt;NA&gt;       white, red red             NA   none </span><br><span class="hljs-comment">##  9     1.83    183 Biggs…    84 black      light      brown           24   male </span><br><span class="hljs-comment">## 10     1.82    182 Obi-W…    77 auburn, w… fair       blue-gray       57   male </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 6 more variables: gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;,</span><br><span class="hljs-comment">## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br><span class="hljs-comment"># Similarly</span><br>starwars <span class="hljs-operator">%&gt;%</span><br>  mutate<span class="hljs-punctuation">(</span><br>    height_m <span class="hljs-operator">=</span> height <span class="hljs-operator">/</span> <span class="hljs-number">100</span><span class="hljs-punctuation">,</span><br>    BMI <span class="hljs-operator">=</span> mass <span class="hljs-operator">/</span> <span class="hljs-punctuation">(</span>height_m<span class="hljs-operator">^</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><br>  <span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  select<span class="hljs-punctuation">(</span>BMI<span class="hljs-punctuation">,</span> everything<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 16</span><br><span class="hljs-comment">##      BMI name      height  mass hair_color skin_color eye_color birth_year sex  </span><br><span class="hljs-comment">##    &lt;dbl&gt; &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;</span><br><span class="hljs-comment">##  1  26.0 Luke Sky…    172    77 blond      fair       blue            19   male </span><br><span class="hljs-comment">##  2  26.9 C-3PO        167    75 &lt;NA&gt;       gold       yellow         112   none </span><br><span class="hljs-comment">##  3  34.7 R2-D2         96    32 &lt;NA&gt;       white, bl… red             33   none </span><br><span class="hljs-comment">##  4  33.3 Darth Va…    202   136 none       white      yellow          41.9 male </span><br><span class="hljs-comment">##  5  21.8 Leia Org…    150    49 brown      light      brown           19   fema…</span><br><span class="hljs-comment">##  6  37.9 Owen Lars    178   120 brown, gr… light      blue            52   male </span><br><span class="hljs-comment">##  7  27.5 Beru Whi…    165    75 brown      light      blue            47   fema…</span><br><span class="hljs-comment">##  8  34.0 R5-D4         97    32 &lt;NA&gt;       white, red red             NA   none </span><br><span class="hljs-comment">##  9  25.1 Biggs Da…    183    84 black      light      brown           24   male </span><br><span class="hljs-comment">## 10  23.2 Obi-Wan …    182    77 auburn, w… fair       blue-gray       57   male </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 7 more variables: gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;,</span><br><span class="hljs-comment">## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;, height_m &lt;dbl&gt;</span><br><br><span class="hljs-comment"># Only want to keep the new variable, use.keep = &quot;none&quot;</span><br>starwars <span class="hljs-operator">%&gt;%</span><br>  mutate<span class="hljs-punctuation">(</span><br>    height_m <span class="hljs-operator">=</span> height <span class="hljs-operator">/</span> <span class="hljs-number">100</span><span class="hljs-punctuation">,</span><br>    BMI <span class="hljs-operator">=</span> mass <span class="hljs-operator">/</span> <span class="hljs-punctuation">(</span>height_m<span class="hljs-operator">^</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    .keep <span class="hljs-operator">=</span> <span class="hljs-string">&quot;none&quot;</span><br>  <span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 2</span><br><span class="hljs-comment">##    height_m   BMI</span><br><span class="hljs-comment">##       &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="hljs-comment">##  1     1.72  26.0</span><br><span class="hljs-comment">##  2     1.67  26.9</span><br><span class="hljs-comment">##  3     0.96  34.7</span><br><span class="hljs-comment">##  4     2.02  33.3</span><br><span class="hljs-comment">##  5     1.5   21.8</span><br><span class="hljs-comment">##  6     1.78  37.9</span><br><span class="hljs-comment">##  7     1.65  27.5</span><br><span class="hljs-comment">##  8     0.97  34.0</span><br><span class="hljs-comment">##  9     1.83  25.1</span><br><span class="hljs-comment">## 10     1.82  23.2</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br></code></pre></td></tr></table></figure>
+<h2 id="relocate-change-the-order-for-data-frame">relocate(): change the
+order for data frame</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs R">starwars <span class="hljs-operator">%&gt;%</span> relocate<span class="hljs-punctuation">(</span>sex<span class="hljs-operator">:</span>homeworld<span class="hljs-punctuation">,</span> .before <span class="hljs-operator">=</span> height<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 14</span><br><span class="hljs-comment">##    name      sex   gender homeworld height  mass hair_color skin_color eye_color</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    </span><br><span class="hljs-comment">##  1 Luke Sky… male  mascu… Tatooine     172    77 blond      fair       blue     </span><br><span class="hljs-comment">##  2 C-3PO     none  mascu… Tatooine     167    75 &lt;NA&gt;       gold       yellow   </span><br><span class="hljs-comment">##  3 R2-D2     none  mascu… Naboo         96    32 &lt;NA&gt;       white, bl… red      </span><br><span class="hljs-comment">##  4 Darth Va… male  mascu… Tatooine     202   136 none       white      yellow   </span><br><span class="hljs-comment">##  5 Leia Org… fema… femin… Alderaan     150    49 brown      light      brown    </span><br><span class="hljs-comment">##  6 Owen Lars male  mascu… Tatooine     178   120 brown, gr… light      blue     </span><br><span class="hljs-comment">##  7 Beru Whi… fema… femin… Tatooine     165    75 brown      light      blue     </span><br><span class="hljs-comment">##  8 R5-D4     none  mascu… Tatooine      97    32 &lt;NA&gt;       white, red red      </span><br><span class="hljs-comment">##  9 Biggs Da… male  mascu… Tatooine     183    84 black      light      brown    </span><br><span class="hljs-comment">## 10 Obi-Wan … male  mascu… Stewjon      182    77 auburn, w… fair       blue-gray</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 5 more variables: birth_year &lt;dbl&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="summarise">summarise():</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs R">mtcars <span class="hljs-operator">%&gt;%</span> summarise<span class="hljs-punctuation">(</span>mean <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>disp<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> count <span class="hljs-operator">=</span> n<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">##       mean count</span><br><span class="hljs-comment">## 1 230.7219    32</span><br><br><span class="hljs-comment"># group first</span><br>mtcars <span class="hljs-operator">%&gt;%</span><br>  group_by<span class="hljs-punctuation">(</span>cyl<span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span> <br>  summarise<span class="hljs-punctuation">(</span>mean <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>disp<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> count <span class="hljs-operator">=</span> n<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 3 × 3</span><br><span class="hljs-comment">##     cyl  mean count</span><br><span class="hljs-comment">##   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span><br><span class="hljs-comment">## 1     4  105.    11</span><br><span class="hljs-comment">## 2     6  183.     7</span><br><span class="hljs-comment">## 3     8  353.    14</span><br><br>mtcars <span class="hljs-operator">%&gt;%</span><br>  group_by<span class="hljs-punctuation">(</span>cyl<span class="hljs-punctuation">,</span> vs<span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  summarise<span class="hljs-punctuation">(</span>mean <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>disp<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span> <span class="hljs-comment"># override by .groups = &quot;keep&quot;. Otherwise, removes the most inner grouping level since it is now just a single row</span><br>  group_vars<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## `summarise()` has grouped output by &#x27;cyl&#x27;. You can override using the `.groups`</span><br><span class="hljs-comment">## argument.</span><br><br><span class="hljs-comment">## [1] &quot;cyl&quot;</span><br><br><span class="hljs-built_in">names</span><span class="hljs-punctuation">(</span>mtcars<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;</span><br><span class="hljs-comment">## [11] &quot;carb&quot;</span><br><br>str<span class="hljs-punctuation">(</span>mtcars<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## &#x27;data.frame&#x27;:    32 obs. of  11 variables:</span><br><span class="hljs-comment">##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span><br><span class="hljs-comment">##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...</span><br><span class="hljs-comment">##  $ disp: num  160 160 108 258 360 ...</span><br><span class="hljs-comment">##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...</span><br><span class="hljs-comment">##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...</span><br><span class="hljs-comment">##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...</span><br><span class="hljs-comment">##  $ qsec: num  16.5 17 18.6 19.4 17 ...</span><br><span class="hljs-comment">##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...</span><br><span class="hljs-comment">##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...</span><br><span class="hljs-comment">##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...</span><br><span class="hljs-comment">##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</span><br><br><span class="hljs-comment"># 查看当前的分组变量</span><br></code></pre></td></tr></table></figure>
+<h1 id="combining-functions-with">Combining functions with %&gt;%</h1>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs R">a1 <span class="hljs-operator">&lt;-</span> group_by<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> species<span class="hljs-punctuation">,</span> sex<span class="hljs-punctuation">)</span><br>a2 <span class="hljs-operator">&lt;-</span> select<span class="hljs-punctuation">(</span>a1<span class="hljs-punctuation">,</span> height<span class="hljs-punctuation">,</span> mass<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## Adding missing grouping variables: `species`, `sex`</span><br><br>a3 <span class="hljs-operator">&lt;-</span> summarise<span class="hljs-punctuation">(</span>a2<span class="hljs-punctuation">,</span><br>  count <span class="hljs-operator">=</span> n<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>  height <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> na.rm <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>  mass <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>mass<span class="hljs-punctuation">,</span> na.rm <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## `summarise()` has grouped output by &#x27;species&#x27;. You can override using the</span><br><span class="hljs-comment">## `.groups` argument.</span><br><br>a3<br><br><span class="hljs-comment">## # A tibble: 41 × 5</span><br><span class="hljs-comment">## # Groups:   species [38]</span><br><span class="hljs-comment">##    species   sex    count height  mass</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="hljs-comment">##  1 Aleena    male       1    79   15  </span><br><span class="hljs-comment">##  2 Besalisk  male       1   198  102  </span><br><span class="hljs-comment">##  3 Cerean    male       1   198   82  </span><br><span class="hljs-comment">##  4 Chagrian  male       1   196  NaN  </span><br><span class="hljs-comment">##  5 Clawdite  female     1   168   55  </span><br><span class="hljs-comment">##  6 Droid     none       6   131.  69.8</span><br><span class="hljs-comment">##  7 Dug       male       1   112   40  </span><br><span class="hljs-comment">##  8 Ewok      male       1    88   20  </span><br><span class="hljs-comment">##  9 Geonosian male       1   183   80  </span><br><span class="hljs-comment">## 10 Gungan    male       3   209.  74  </span><br><span class="hljs-comment">## # ℹ 31 more rows</span><br><br><span class="hljs-comment"># A big change</span><br>starwars <span class="hljs-operator">%&gt;%</span><br>  group_by<span class="hljs-punctuation">(</span>species<span class="hljs-punctuation">,</span> sex<span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  select<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> mass<span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  summarise<span class="hljs-punctuation">(</span><br>    height <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> na.rm <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    mass <span class="hljs-operator">=</span> mean<span class="hljs-punctuation">(</span>mass<span class="hljs-punctuation">,</span> na.rm <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><br>  <span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## Adding missing grouping variables: `species`, `sex`</span><br><span class="hljs-comment">## `summarise()` has grouped output by &#x27;species&#x27;. You can override using the</span><br><span class="hljs-comment">## `.groups` argument.</span><br><br><span class="hljs-comment">## # A tibble: 41 × 4</span><br><span class="hljs-comment">## # Groups:   species [38]</span><br><span class="hljs-comment">##    species   sex    height  mass</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="hljs-comment">##  1 Aleena    male      79   15  </span><br><span class="hljs-comment">##  2 Besalisk  male     198  102  </span><br><span class="hljs-comment">##  3 Cerean    male     198   82  </span><br><span class="hljs-comment">##  4 Chagrian  male     196  NaN  </span><br><span class="hljs-comment">##  5 Clawdite  female   168   55  </span><br><span class="hljs-comment">##  6 Droid     none     131.  69.8</span><br><span class="hljs-comment">##  7 Dug       male     112   40  </span><br><span class="hljs-comment">##  8 Ewok      male      88   20  </span><br><span class="hljs-comment">##  9 Geonosian male     183   80  </span><br><span class="hljs-comment">## 10 Gungan    male     209.  74  </span><br><span class="hljs-comment">## # ℹ 31 more rows</span><br><br>starwars <span class="hljs-operator">%&gt;%</span><br>  group_by<span class="hljs-punctuation">(</span>height_binned <span class="hljs-operator">=</span> cut<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  summarise<span class="hljs-punctuation">(</span>count <span class="hljs-operator">=</span> n<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 4 × 2</span><br><span class="hljs-comment">##   height_binned count</span><br><span class="hljs-comment">##   &lt;fct&gt;         &lt;int&gt;</span><br><span class="hljs-comment">## 1 (65.8,132]        9</span><br><span class="hljs-comment">## 2 (132,198]        61</span><br><span class="hljs-comment">## 3 (198,264]        11</span><br><span class="hljs-comment">## 4 &lt;NA&gt;              6</span><br></code></pre></td></tr></table></figure>
+<h2 id="patterns-of-operations">Patterns of operations</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs R">select<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> name<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 1</span><br><span class="hljs-comment">##    name              </span><br><span class="hljs-comment">##    &lt;chr&gt;             </span><br><span class="hljs-comment">##  1 Luke Skywalker    </span><br><span class="hljs-comment">##  2 C-3PO             </span><br><span class="hljs-comment">##  3 R2-D2             </span><br><span class="hljs-comment">##  4 Darth Vader       </span><br><span class="hljs-comment">##  5 Leia Organa       </span><br><span class="hljs-comment">##  6 Owen Lars         </span><br><span class="hljs-comment">##  7 Beru Whitesun Lars</span><br><span class="hljs-comment">##  8 R5-D4             </span><br><span class="hljs-comment">##  9 Biggs Darklighter </span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi    </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-comment"># which is equivalent to </span><br>select<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 1</span><br><span class="hljs-comment">##    name              </span><br><span class="hljs-comment">##    &lt;chr&gt;             </span><br><span class="hljs-comment">##  1 Luke Skywalker    </span><br><span class="hljs-comment">##  2 C-3PO             </span><br><span class="hljs-comment">##  3 R2-D2             </span><br><span class="hljs-comment">##  4 Darth Vader       </span><br><span class="hljs-comment">##  5 Leia Organa       </span><br><span class="hljs-comment">##  6 Owen Lars         </span><br><span class="hljs-comment">##  7 Beru Whitesun Lars</span><br><span class="hljs-comment">##  8 R5-D4             </span><br><span class="hljs-comment">##  9 Biggs Darklighter </span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi    </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-comment"># Prior to the col index rather than the given value unless you use identity</span><br>height <span class="hljs-operator">&lt;-</span> 5<br>select<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> height<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 1</span><br><span class="hljs-comment">##    height</span><br><span class="hljs-comment">##     &lt;int&gt;</span><br><span class="hljs-comment">##  1    172</span><br><span class="hljs-comment">##  2    167</span><br><span class="hljs-comment">##  3     96</span><br><span class="hljs-comment">##  4    202</span><br><span class="hljs-comment">##  5    150</span><br><span class="hljs-comment">##  6    178</span><br><span class="hljs-comment">##  7    165</span><br><span class="hljs-comment">##  8     97</span><br><span class="hljs-comment">##  9    183</span><br><span class="hljs-comment">## 10    182</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br>name <span class="hljs-operator">&lt;-</span> <span class="hljs-string">&quot;color&quot;</span><br>select<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> ends_with<span class="hljs-punctuation">(</span>name<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># since the helpers - ends_with()</span><br><br><span class="hljs-comment">## # A tibble: 87 × 3</span><br><span class="hljs-comment">##    hair_color    skin_color  eye_color</span><br><span class="hljs-comment">##    &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;    </span><br><span class="hljs-comment">##  1 blond         fair        blue     </span><br><span class="hljs-comment">##  2 &lt;NA&gt;          gold        yellow   </span><br><span class="hljs-comment">##  3 &lt;NA&gt;          white, blue red      </span><br><span class="hljs-comment">##  4 none          white       yellow   </span><br><span class="hljs-comment">##  5 brown         light       brown    </span><br><span class="hljs-comment">##  6 brown, grey   light       blue     </span><br><span class="hljs-comment">##  7 brown         light       blue     </span><br><span class="hljs-comment">##  8 &lt;NA&gt;          white, red  red      </span><br><span class="hljs-comment">##  9 black         light       brown    </span><br><span class="hljs-comment">## 10 auburn, white fair        blue-gray</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br>name <span class="hljs-operator">&lt;-</span> 5<br>select<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> name<span class="hljs-punctuation">,</span> identity<span class="hljs-punctuation">(</span>name<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># name is evaluated in the surrounding context and represents the fifth column</span><br><br><span class="hljs-comment">## # A tibble: 87 × 2</span><br><span class="hljs-comment">##    name               skin_color </span><br><span class="hljs-comment">##    &lt;chr&gt;              &lt;chr&gt;      </span><br><span class="hljs-comment">##  1 Luke Skywalker     fair       </span><br><span class="hljs-comment">##  2 C-3PO              gold       </span><br><span class="hljs-comment">##  3 R2-D2              white, blue</span><br><span class="hljs-comment">##  4 Darth Vader        white      </span><br><span class="hljs-comment">##  5 Leia Organa        light      </span><br><span class="hljs-comment">##  6 Owen Lars          light      </span><br><span class="hljs-comment">##  7 Beru Whitesun Lars light      </span><br><span class="hljs-comment">##  8 R5-D4              white, red </span><br><span class="hljs-comment">##  9 Biggs Darklighter  light      </span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi     fair       </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br>vars <span class="hljs-operator">&lt;-</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;name&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;height&quot;</span><span class="hljs-punctuation">)</span><br>select<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> all_of<span class="hljs-punctuation">(</span>vars<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;mass&quot;</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># vars is a vector thus it should be input by all_of() function</span><br><br><span class="hljs-comment">## # A tibble: 87 × 3</span><br><span class="hljs-comment">##    name               height  mass</span><br><span class="hljs-comment">##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt;</span><br><span class="hljs-comment">##  1 Luke Skywalker        172    77</span><br><span class="hljs-comment">##  2 C-3PO                 167    75</span><br><span class="hljs-comment">##  3 R2-D2                  96    32</span><br><span class="hljs-comment">##  4 Darth Vader           202   136</span><br><span class="hljs-comment">##  5 Leia Organa           150    49</span><br><span class="hljs-comment">##  6 Owen Lars             178   120</span><br><span class="hljs-comment">##  7 Beru Whitesun Lars    165    75</span><br><span class="hljs-comment">##  8 R5-D4                  97    32</span><br><span class="hljs-comment">##  9 Biggs Darklighter     183    84</span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi        182    77</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br></code></pre></td></tr></table></figure>
+<h2 id="mutating-operations">Mutating operations</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment"># It will create a new col if the mutate function is provided with a string or a number</span><br>df <span class="hljs-operator">&lt;-</span> starwars <span class="hljs-operator">%&gt;%</span> select<span class="hljs-punctuation">(</span>name<span class="hljs-punctuation">,</span> height<span class="hljs-punctuation">,</span> mass<span class="hljs-punctuation">)</span><br>mutate<span class="hljs-punctuation">(</span>df<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;height&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-number">2</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 5</span><br><span class="hljs-comment">##    name               height  mass `&quot;height&quot;`   `2`</span><br><span class="hljs-comment">##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;</span><br><span class="hljs-comment">##  1 Luke Skywalker        172    77 height         2</span><br><span class="hljs-comment">##  2 C-3PO                 167    75 height         2</span><br><span class="hljs-comment">##  3 R2-D2                  96    32 height         2</span><br><span class="hljs-comment">##  4 Darth Vader           202   136 height         2</span><br><span class="hljs-comment">##  5 Leia Organa           150    49 height         2</span><br><span class="hljs-comment">##  6 Owen Lars             178   120 height         2</span><br><span class="hljs-comment">##  7 Beru Whitesun Lars    165    75 height         2</span><br><span class="hljs-comment">##  8 R5-D4                  97    32 height         2</span><br><span class="hljs-comment">##  9 Biggs Darklighter     183    84 height         2</span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi        182    77 height         2</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-comment"># For len=1 vector, it will be recycled to match the num of rows</span><br>mutate<span class="hljs-punctuation">(</span>df<span class="hljs-punctuation">,</span> height <span class="hljs-operator">+</span> <span class="hljs-number">10</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 4</span><br><span class="hljs-comment">##    name               height  mass `height + 10`</span><br><span class="hljs-comment">##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt;         &lt;dbl&gt;</span><br><span class="hljs-comment">##  1 Luke Skywalker        172    77           182</span><br><span class="hljs-comment">##  2 C-3PO                 167    75           177</span><br><span class="hljs-comment">##  3 R2-D2                  96    32           106</span><br><span class="hljs-comment">##  4 Darth Vader           202   136           212</span><br><span class="hljs-comment">##  5 Leia Organa           150    49           160</span><br><span class="hljs-comment">##  6 Owen Lars             178   120           188</span><br><span class="hljs-comment">##  7 Beru Whitesun Lars    165    75           175</span><br><span class="hljs-comment">##  8 R5-D4                  97    32           107</span><br><span class="hljs-comment">##  9 Biggs Darklighter     183    84           193</span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi        182    77           192</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-comment"># Add seperately</span><br>var <span class="hljs-operator">&lt;-</span> seq<span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span> nrow<span class="hljs-punctuation">(</span>df<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br>mutate<span class="hljs-punctuation">(</span>df<span class="hljs-punctuation">,</span> new <span class="hljs-operator">=</span> var<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 4</span><br><span class="hljs-comment">##    name               height  mass   new</span><br><span class="hljs-comment">##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;int&gt;</span><br><span class="hljs-comment">##  1 Luke Skywalker        172    77     1</span><br><span class="hljs-comment">##  2 C-3PO                 167    75     2</span><br><span class="hljs-comment">##  3 R2-D2                  96    32     3</span><br><span class="hljs-comment">##  4 Darth Vader           202   136     4</span><br><span class="hljs-comment">##  5 Leia Organa           150    49     5</span><br><span class="hljs-comment">##  6 Owen Lars             178   120     6</span><br><span class="hljs-comment">##  7 Beru Whitesun Lars    165    75     7</span><br><span class="hljs-comment">##  8 R5-D4                  97    32     8</span><br><span class="hljs-comment">##  9 Biggs Darklighter     183    84     9</span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi        182    77    10</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><br><span class="hljs-comment"># group_by has the mutate semantics not similar with select</span><br>group_by<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> sex <span class="hljs-operator">=</span> as.factor<span class="hljs-punctuation">(</span>sex<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 14</span><br><span class="hljs-comment">## # Groups:   sex [5]</span><br><span class="hljs-comment">##    name     height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt; </span><br><span class="hljs-comment">##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…</span><br><span class="hljs-comment">##  2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…</span><br><span class="hljs-comment">##  3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…</span><br><span class="hljs-comment">##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…</span><br><span class="hljs-comment">##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…</span><br><span class="hljs-comment">##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…</span><br><span class="hljs-comment">##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…</span><br><span class="hljs-comment">##  8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…</span><br><span class="hljs-comment">##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…</span><br><span class="hljs-comment">## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;</span><br><br>group_by<span class="hljs-punctuation">(</span>starwars<span class="hljs-punctuation">,</span> height_binned <span class="hljs-operator">=</span> cut<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 87 × 15</span><br><span class="hljs-comment">## # Groups:   height_binned [4]</span><br><span class="hljs-comment">##    name     height  mass hair_color skin_color eye_color birth_year sex   gender</span><br><span class="hljs-comment">##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; </span><br><span class="hljs-comment">##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…</span><br><span class="hljs-comment">##  2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…</span><br><span class="hljs-comment">##  3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…</span><br><span class="hljs-comment">##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…</span><br><span class="hljs-comment">##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…</span><br><span class="hljs-comment">##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…</span><br><span class="hljs-comment">##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…</span><br><span class="hljs-comment">##  8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…</span><br><span class="hljs-comment">##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…</span><br><span class="hljs-comment">## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…</span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br><span class="hljs-comment">## # ℹ 6 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span><br><span class="hljs-comment">## #   vehicles &lt;list&gt;, starships &lt;list&gt;, height_binned &lt;fct&gt;</span><br><br><span class="hljs-comment"># drop the na groups</span><br>starwars <span class="hljs-operator">%&gt;%</span><br>  filter<span class="hljs-punctuation">(</span><span class="hljs-operator">!</span><span class="hljs-built_in">is.na</span><span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  group_by<span class="hljs-punctuation">(</span>height_binned <span class="hljs-operator">=</span> cut<span class="hljs-punctuation">(</span>height<span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">%&gt;%</span><br>  summarise<span class="hljs-punctuation">(</span>count <span class="hljs-operator">=</span> n<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment">## # A tibble: 3 × 2</span><br><span class="hljs-comment">##   height_binned count</span><br><span class="hljs-comment">##   &lt;fct&gt;         &lt;int&gt;</span><br><span class="hljs-comment">## 1 (65.8,132]        9</span><br><span class="hljs-comment">## 2 (132,198]        61</span><br><span class="hljs-comment">## 3 (198,264]        11</span><br><br><span class="hljs-comment"># Problem</span><br>group_by<span class="hljs-punctuation">(</span>df<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;month&quot;</span><span class="hljs-punctuation">)</span> <span class="hljs-comment"># a col of month will be generated</span><br><br><span class="hljs-comment">## # A tibble: 87 × 4</span><br><span class="hljs-comment">## # Groups:   &quot;month&quot; [1]</span><br><span class="hljs-comment">##    name               height  mass `&quot;month&quot;`</span><br><span class="hljs-comment">##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;    </span><br><span class="hljs-comment">##  1 Luke Skywalker        172    77 month    </span><br><span class="hljs-comment">##  2 C-3PO                 167    75 month    </span><br><span class="hljs-comment">##  3 R2-D2                  96    32 month    </span><br><span class="hljs-comment">##  4 Darth Vader           202   136 month    </span><br><span class="hljs-comment">##  5 Leia Organa           150    49 month    </span><br><span class="hljs-comment">##  6 Owen Lars             178   120 month    </span><br><span class="hljs-comment">##  7 Beru Whitesun Lars    165    75 month    </span><br><span class="hljs-comment">##  8 R5-D4                  97    32 month    </span><br><span class="hljs-comment">##  9 Biggs Darklighter     183    84 month    </span><br><span class="hljs-comment">## 10 Obi-Wan Kenobi        182    77 month    </span><br><span class="hljs-comment">## # ℹ 77 more rows</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Packages/" class="print-no-link">#Packages</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>dplyr</div>
+      <div>http://example.com/2024/10/06/dplyr/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 6, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/02/Perceptron/" title="Generation of Latex and github-styled code">
+                        <span class="hidden-mobile">Generation of Latex and github-styled code</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2024/10/06/dplyr/';
+          this.page.identifier = '/2024/10/06/dplyr/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'CJ' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Happy</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+<!-- <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> -->
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
