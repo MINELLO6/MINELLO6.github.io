@@ -50,6 +50,12 @@
     
     
     
+    <tags>
+      
+      <tag>Plan</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -62,6 +68,12 @@
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to my study blog! Here, I'll be storing notes on varioustopics, including Machine Learning and Mathematics. As I tend to be abit lazy, updates might be infrequent. However, I hope to manage itconsistently over time.</p><p>-- From ShenZhen Bay Laboratory</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>Others</tag>
+      
+    </tags>
     
   </entry>
   
