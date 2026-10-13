@@ -37,7 +37,7 @@ The mathematical foundations of generative modeling.
 - Variational Inference & ELBO
 - Markov Chains & Brownian Motion
 - Stochastic Differential Equations
-- Fokker–Planck & Continuity Equations
+- Fokker-Planck & Continuity Equations
 - Optimal Transport & Wasserstein Distance
 - Numerical ODE & SDE Methods
 
