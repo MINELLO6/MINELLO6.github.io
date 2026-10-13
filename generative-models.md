@@ -2,150 +2,141 @@
 layout: page
 title: Generative Models
 permalink: /generative-models/
-includelink: true
-
+includelink: false
+mathjax: true
 ---
 
-*A structured reading and implementation notebook on probabilistic and deep generative modeling.*
+Generative modeling studies how to learn the underlying
+probability distribution of data and generate new samples.
 
-This page collects my learning notes on **how generative models represent distributions, learn from observations, and produce new samples**. The emphasis is on mathematical derivations, connections between methods, and minimal reproducible implementations.
-
-> **How to use this index.** Each section is a topic roadmap. As I publish articles, I will link them here. The categories overlap: for example, discrete diffusion is also diffusion, and DiT is an architecture rather than a distinct probabilistic principle.
+This page organizes my notes on the mathematical
+foundations, classical probabilistic models, and
+modern deep generative modeling methods.
 
 ## Contents
 
-- [00 · Mathematical Foundations](#00--mathematical-foundations)
-- [01 · Classical Probabilistic Models](#01--classical-probabilistic-models)
-- [02 · Latent Variables, Likelihood & Implicit Models](#02--latent-variables-likelihood--implicit-models)
-- [03 · Energy-Based Models](#03--energy-based-models)
-- [04 · Diffusion & Score-Based Models](#04--diffusion--score-based-models)
-- [05 · Flow & Optimal Transport](#05--flow--optimal-transport)
-- [06 · Bridge Models](#06--bridge-models)
-- [07 · Discrete Generative Models](#07--discrete-generative-models)
-- [08 · Modern Architectures & Acceleration](#08--modern-architectures--acceleration)
-- [Connections & Writing Template](#connections--writing-template)
+- [00 - Mathematical Foundations](#foundations)
+- [01 - Classical Probabilistic Models](#classical)
+- [02 - Latent Variable & Likelihood Models](#latent)
+- [03 - Energy-Based Models](#energy)
+- [04 - Diffusion & Score-Based Models](#diffusion)
+- [05 - Flow & Optimal Transport](#flow)
+- [06 - Bridge Models](#bridge)
+- [07 - Discrete Generative Models](#discrete)
+- [08 - Modern Architectures & Acceleration](#modern)
 
 ---
 
-## 00 · Mathematical Foundations
+## 00 - Mathematical Foundations {#foundations}
 
-**Goal:** Develop the probability and numerical tools behind modern generative modeling.
+The mathematical foundations of generative modeling.
 
-- **Probability & information theory:** conditional distributions, entropy, KL divergence, mutual information.
-- **Inference:** maximum likelihood, EM, approximate posteriors, variational inference, ELBO.
-- **Stochastic processes:** Markov chains, Brownian motion, Itô calculus, reverse-time SDEs.
-- **PDEs and numerical methods:** Fokker–Planck and continuity equations; Euler–Maruyama, ODE solvers.
-- **Transport and control:** Wasserstein distances, optimal transport, Girsanov theorem, Doob *h*-transform.
+- Probability Distributions & Latent Variables
+- Maximum Likelihood Estimation
+- KL Divergence & Information Theory
+- Variational Inference & ELBO
+- Markov Chains & Brownian Motion
+- Stochastic Differential Equations
+- Fokker–Planck & Continuity Equations
+- Optimal Transport & Wasserstein Distance
+- Numerical ODE & SDE Methods
 
-**Suggested note sequence:** KL & ELBO → Brownian Motion & SDEs → Fokker–Planck → Optimal Transport.
+## 01 - Classical Probabilistic Models {#classical}
 
-## 01 · Classical Probabilistic Models
+Classical statistical models and probabilistic
+generative processes.
 
-**Question:** How can explicit statistical assumptions describe a data-generating process?
-
-- Gaussian Mixture Models (GMM) and Expectation–Maximization (EM)
+- Gaussian Mixture Models (GMM)
 - Hidden Markov Models (HMM)
-- Bayesian networks and probabilistic graphical models
+- Bayesian Networks
 - Latent Dirichlet Allocation (LDA)
-- Hierarchical Bayesian generative models and posterior predictive sampling
+- Expectation-Maximization (EM)
 
-**Writing focus:** Joint distributions, latent variables, graphical structure, exact vs approximate inference.
+## 02 - Latent Variable & Likelihood Models {#latent}
 
-## 02 · Latent Variables, Likelihood & Implicit Models
+Deep generative models based on latent variables,
+explicit likelihoods, or implicit sampling.
 
-**Question:** How can neural networks represent complicated high-dimensional distributions?
+- Variational Autoencoders (VAE)
+- Beta-VAE
+- Vector Quantized VAE (VQ-VAE)
+- Autoregressive Models
+- Generative Adversarial Networks (GAN)
+- Wasserstein GAN (WGAN)
+- Normalizing Flows
+- RealNVP & Glow
 
-- Autoregressive models: PixelCNN, WaveNet, Transformer language models
-- Variational Autoencoders: VAE, β-VAE, hierarchical VAE
-- Vector-quantized latent models: VQ-VAE, VQ-VAE-2
-- Normalizing flows: NICE, RealNVP, Glow
-- Implicit generative models: GAN, WGAN, StyleGAN
+## 03 - Energy-Based Models {#energy}
 
-**Suggested note sequence:** VAE & ELBO → Reparameterization → Autoregressive Likelihood → Normalizing Flows → GAN/WGAN.
+Models that represent probability distributions
+through energy functions.
 
-## 03 · Energy-Based Models
+- Energy-Based Models (EBM)
+- Restricted Boltzmann Machines
+- Contrastive Divergence
+- Noise Contrastive Estimation
+- Langevin Sampling
 
-**Question:** Can a model learn a relative energy or unnormalized probability instead of a directly normalized density?
+## 04 - Diffusion & Score-Based Models {#diffusion}
 
-- Energy-based modeling and partition functions
-- Boltzmann Machines and Restricted Boltzmann Machines
-- Contrastive Divergence, Noise-Contrastive Estimation (NCE)
-- Sampling with Langevin dynamics and MCMC
-- Connections among energy gradients, score estimation, and diffusion
-
-**Writing focus:** Normalization, learning objectives, negative samples, mixing and sampling costs.
-
-## 04 · Diffusion & Score-Based Models
-
-**Question:** How can data be generated by reversing a gradual noising process?
+Generative modeling through iterative denoising
+and score estimation.
 
 - Denoising Diffusion Probabilistic Models (DDPM)
 - Denoising Diffusion Implicit Models (DDIM)
-- Denoising Score Matching and NCSN
-- Score-based generative modeling through SDEs
-- Probability-flow ODE, EDM, guidance and noise schedules
+- Denoising Score Matching
+- Noise Conditional Score Networks (NCSN)
+- Score-Based Generative Modeling through SDEs
+- Probability Flow ODE
+- Elucidating the Design Space (EDM)
 
-**Suggested note sequence:** DDPM → DDIM → Score Matching → Reverse-Time SDE → Probability-Flow ODE → EDM.
+## 05 - Flow & Optimal Transport {#flow}
 
-## 05 · Flow & Optimal Transport
+Continuous-time generative modeling through
+transport maps and learned vector fields.
 
-**Question:** How can a time-dependent vector field transport one distribution to another?
+- Normalizing Flows
+- Continuous Normalizing Flows (CNF)
+- Neural Ordinary Differential Equations
+- Optimal Transport
+- Flow Matching
+- Conditional Flow Matching
+- Rectified Flow
+- OT-CFM
 
-- Discrete normalizing flows and change of variables
-- Continuous Normalizing Flows (CNF) and Neural ODEs
-- Continuity equation and instantaneous change of variables
-- Flow Matching and Conditional Flow Matching (CFM)
-- Optimal-Transport CFM, Rectified Flow and reflow
+## 06 - Bridge Models {#bridge}
 
-**Suggested note sequence:** Change of Variables → CNF → Continuity Equation → Flow Matching → Rectified Flow.
+Stochastic processes connecting endpoints
+or probability distributions.
 
-## 06 · Bridge Models
+- Brownian Bridges
+- Diffusion Bridges
+- Schrödinger Bridges
+- Diffusion Schrödinger Bridges
+- Bridge Matching
+- Stochastic Control & Doob h-Transforms
 
-**Question:** How can stochastic processes be conditioned or optimized to connect endpoints or distributions?
+## 07 - Discrete Generative Models {#discrete}
 
-- Brownian Bridge and conditioned diffusion processes
-- Doob *h*-transforms and diffusion bridges
-- Schrödinger Bridge and entropy-regularized optimal transport
-- Diffusion Schrödinger Bridge (DSB)
-- Bridge Matching and connections to score/flow matching
+Generative methods for discrete state spaces,
+including tokens and categorical variables.
 
-**Suggested note sequence:** Brownian Bridge → Schrödinger Bridge → DSB → Bridge Matching.
+- Discrete Diffusion Models
+- D3PM
+- Masked Generative Modeling
+- MaskGIT
+- Discrete Flow Matching
+- Diffusion Language Models
 
-## 07 · Discrete Generative Models
+## 08 - Modern Architectures & Acceleration {#modern}
 
-**Question:** How do generative methods operate on tokens, categories, graphs and other discrete states?
+Architectural developments and efficient
+training or sampling techniques.
 
-- Categorical and absorbing-state diffusion; D3PM
-- Masked token generation and MaskGIT
-- Discrete score or ratio estimation
-- Diffusion language models and masked diffusion language models
-- Discrete/continuous hybrid methods for text, molecules and structured data
-
-**Writing focus:** Transition kernels, discrete-time objectives, decoding and sampling efficiency.
-
-## 08 · Modern Architectures & Acceleration
-
-**Question:** How are these modeling principles made scalable and useful in practice?
-
-- Latent Diffusion Models and Stable Diffusion
-- U-Net, Diffusion Transformers (DiT), latent-space modeling
-- Conditioning, classifier-free guidance and controllability
-- Consistency Models, distillation and few-step generation
-- Efficient training, sampling solvers, memory and compute trade-offs
-
-**Writing focus:** Separate the *generative objective* from the *neural architecture* and *sampling algorithm*.
-
----
-
-## Connections & Writing Template
-
-Useful mathematical connections to develop across notes:
-
-- **Bayesian inference → variational inference → VAE:** approximate posterior inference and the ELBO.
-- **Denoising score matching → reverse-time SDE → probability-flow ODE:** stochastic and deterministic generative dynamics.
-- **Optimal transport → CNF → flow matching → rectified flow:** probability paths and vector fields.
-- **Brownian bridge → Schrödinger bridge → diffusion bridges:** conditional paths and path-space entropy.
-
-I aim to use a common article structure: **Motivation → Prerequisites → Mathematical Derivation → Architecture → Training & Sampling → PyTorch Implementation → Connections → Limitations → References**.
-
-*Last updated: October 2026. This is a living outline; links will be added as articles are published.*
+- Latent Diffusion Models (LDM)
+- Stable Diffusion
+- Diffusion Transformers (DiT)
+- Consistency Models
+- Consistency Trajectory Models
+- Progressive Distillation
+- Few-Step Generative Models
