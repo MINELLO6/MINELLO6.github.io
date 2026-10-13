@@ -1,0 +1,18 @@
+
+# Site settings
+title: Minello's Blog
+email:
+description: "Notes on Mathematics, Statistics, and Artificial Intelligence."
+baseurl: ""
+url: "https://minello6.github.io"
+github_username: MINELLO6
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
