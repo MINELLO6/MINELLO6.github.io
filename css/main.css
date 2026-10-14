@@ -451,3 +451,34 @@ a:visited { color: #205caa; }
     max-width: 100%;
     height: auto;
 }
+
+
+/* Mobile MathJax layout fix */
+
+@media screen and (max-width: 600px) {
+
+    .post,
+    .post-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .post-content mjx-container[jax="CHTML"][display="true"] {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .post-content table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+}
+
