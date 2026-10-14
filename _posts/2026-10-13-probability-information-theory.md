@@ -590,8 +590,7 @@ Then the law of large numbers gives
 
 $$
 \begin{aligned}
-&-\frac{1}{n}\sum_{i=1}^{n}\log p_\theta(X_i)\\
-&\quad\xrightarrow{\mathrm{a.s.}} H(p_{\mathrm{data}},p_\theta),
+&-\frac{1}{n}\sum_{i=1}^{n}\log p_\theta(X_i)\xrightarrow{\mathrm{a.s.}} H(p_{\mathrm{data}},p_\theta),
 \end{aligned}
 $$
 
@@ -680,24 +679,39 @@ an approximation.
 
 **Forward KL:**
 
-<img src="/assets/images/generative-models/forwardkl.png" alt="Forward KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+
+<img src="/assets/images/generative-models/forwardkl.png"
+     alt="Forward KL distribution comparison"
+     style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+
+<div style="text-align: center; margin: 24px 0;">
+
 $$
 D_{\mathrm{KL}}(p\|q)
 =
 \mathbb E_p\left[\log\frac{p(X)}{q(X)}\right].
 $$
 
-This penalizes $q$ for assigning low probability to regions where $p$ has substantial probability mass.
+</div>
 
+
+This penalizes $q$ for assigning low probability to regions where $p$ has substantial probability mass.
 
 **Reverse KL:**
 
-<img src="/assets/images/generative-models/reversekl.png" alt="Reverse KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+<img src="/assets/images/generative-models/reversekl.png"
+     alt="Reverse KL distribution comparison"
+     style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+
+<div style="text-align: center; margin: 24px 0;">
+
 $$
 D_{\mathrm{KL}}(q\|p)
 =
 \mathbb E_q\left[\log\frac{q(X)}{p(X)}\right].
 $$
+
+</div>
 
 This penalizes $q$ for placing probability mass in regions where $p$ has low probability.
 
