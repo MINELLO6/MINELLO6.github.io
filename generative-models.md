@@ -27,19 +27,157 @@ modern deep generative modeling methods.
 
 ---
 
+
 ## 00 - Mathematical Foundations {#foundations}
 
-The mathematical foundations of generative modeling.
+**Goal:** Develop the mathematical tools required to understand,
+derive, and implement modern generative models.
 
-- Probability Distributions & Latent Variables
-- Maximum Likelihood Estimation
-- KL Divergence & Information Theory
-- Variational Inference & ELBO
-- Markov Chains & Brownian Motion
-- Stochastic Differential Equations
-- Fokker-Planck & Continuity Equations
-- Optimal Transport & Wasserstein Distance
-- Numerical ODE & SDE Methods
+### M01 - Probability & Information Theory
+
+- Joint, marginal, and conditional distributions
+- Conditional expectation and the tower property
+- Entropy, differential entropy, and cross-entropy
+- KL divergence $D_{\mathrm{KL}}(p\|q)$
+- Mutual information $I(X;Y)$
+- Change of variables and pushforward distributions
+
+**Applications:** VAE, autoregressive models, normalizing flows.
+
+### M02 - Statistical Inference & Latent Variables
+
+- Maximum likelihood estimation (MLE)
+- Maximum a posteriori estimation (MAP)
+- Bayesian inference and posterior predictive distributions
+- Latent variable models and marginal likelihood
+- Expectation-Maximization (EM)
+
+**Applications:** GMM, VAE, Bayesian generative models.
+
+### M03 - Variational Inference
+
+- Jensen's inequality
+- Evidence Lower Bound (ELBO)
+- KL decomposition and variational objectives
+- Mean-field variational inference
+- Reparameterization trick
+
+**Core identity:**
+
+$$
+\log p_\theta(x)
+=
+\mathcal{L}_{\mathrm{ELBO}}(x)
++
+D_{\mathrm{KL}}
+\left(
+q_\phi(z\mid x)
+\|p_\theta(z\mid x)
+\right)
+$$
+
+**Applications:** VAE, DDPM, latent variable models.
+
+### M04 - Gaussian Identities & Matrix Calculus
+
+- Multivariate Gaussian distributions
+- Conditional and marginal Gaussian distributions
+- Products of Gaussian densities
+- KL divergence between Gaussian distributions
+- Gradient, Jacobian, Hessian, and trace identities
+- Matrix determinant and change-of-variables formula
+
+**Applications:** VAE, DDPM, normalizing flows.
+
+### M05 - Stochastic Processes
+
+- Markov chains and transition kernels
+- Brownian motion $W_t$ and quadratic variation
+- Itô's lemma and stochastic integration
+- Stochastic differential equations (SDEs)
+- Langevin dynamics
+
+**Core equation:**
+
+$$
+dX_t = f(X_t,t)\,dt + g(X_t,t)\,dW_t
+$$
+
+**Applications:** DDPM, score-based generative models.
+
+### M06 - SDEs & Fokker-Planck Equations
+
+- Forward and reverse-time SDEs
+- Fokker-Planck equation
+- Score functions $\nabla_x \log p_t(x)$
+- Score matching and denoising score matching
+- Probability flow ODE
+- Connections between SDEs and deterministic flows
+
+**Applications:** Score SDE, NCSN, diffusion models.
+
+### M07 - ODEs, PDEs & Continuous Flows
+
+- Ordinary differential equations (ODEs)
+- Continuity equation
+- Pushforward probability measures
+- Instantaneous change-of-variables formula
+- Neural ODEs
+- Continuous normalizing flows (CNFs)
+
+**Core equation:**
+
+$$
+\frac{\partial p_t(x)}{\partial t}
++
+\nabla\cdot\left(p_t(x)v_t(x)\right)
+=0
+$$
+
+**Applications:** CNF, flow matching, rectified flow.
+
+### M08 - Optimal Transport & Stochastic Control
+
+- Monge and Kantorovich formulations
+- Wasserstein distances $W_p(\mu,\nu)$
+- Dynamic optimal transport
+- Entropic optimal transport
+- Girsanov theorem
+- Doob $h$-transform
+- Stochastic optimal control
+
+**Applications:** OT-CFM, Schrodinger bridges, diffusion bridges.
+
+### M09 - Numerical Methods
+
+- Euler and Runge-Kutta methods
+- Euler-Maruyama method
+- Numerical integration of reverse-time SDEs
+- Predictor-corrector sampling
+- Numerical stability and discretization error
+- Adaptive-step ODE solvers
+
+**Applications:** DDPM, DDIM, flow matching, diffusion samplers.
+
+---
+
+### Suggested Learning Path
+
+**Stage 1 - Variational Generative Models**
+
+M01 $\rightarrow$ M02 $\rightarrow$ M03 $\rightarrow$ M04
+$\rightarrow$ VAE
+
+**Stage 2 - Diffusion & Score-Based Models**
+
+M04 $\rightarrow$ M05 $\rightarrow$ M06 $\rightarrow$ M09
+$\rightarrow$ DDPM / Score SDE
+
+**Stage 3 - Flow & Bridge Models**
+
+M07 $\rightarrow$ M08 $\rightarrow$ M09
+$\rightarrow$ Flow Matching / Schrodinger Bridge
+
 
 ## 01 - Classical Probabilistic Models {#classical}
 
