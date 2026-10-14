@@ -453,32 +453,20 @@ a:visited { color: #205caa; }
 }
 
 
-/* Mobile MathJax layout fix */
 
+/* MathJax: centered equations on desktop and mobile */
 
-/* Responsive mathematical equations */
-
-/* Keep display equations centered */
 .post-content mjx-container[jax="CHTML"][display="true"] {
     display: block;
     width: 100%;
     max-width: 100%;
     margin: 1.5em auto !important;
-    text-align: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
+    text-align: center !important;
+    overflow: visible;
 }
 
-/* Preserve centered equations on desktop */
-@media screen and (min-width: 601px) {
-    .post-content mjx-container[jax="CHTML"][display="true"] {
-        overflow-x: visible;
-    }
-}
+/* Mobile: long equations scroll independently */
 
-/* Mobile layout */
 @media screen and (max-width: 600px) {
     .post,
     .post-content {
@@ -488,11 +476,18 @@ a:visited { color: #205caa; }
         box-sizing: border-box;
     }
 
+    .post-content mjx-container[jax="CHTML"][display="true"] {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .post-content table {
         display: block;
         max-width: 100%;
         overflow-x: auto;
     }
 }
+
 
 
