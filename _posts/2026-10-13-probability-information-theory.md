@@ -4,6 +4,7 @@ title: "M01 - Probability and Information Theory for Generative Modeling"
 date: 2026-10-13
 mathjax: true
 comments: true
+typora-root-url: F:/Blog-Backup/
 ---
 
 
@@ -671,16 +672,13 @@ Equality holds if and only if $p=q$ almost everywhere.
 
 ### 4.3 Forward and Reverse KL
 
-Because KL divergence is asymmetric, the order
-of the distributions matters.
+Because KL divergence is asymmetric, the order of the distributions matters.
 
-Suppose $p$ is a target distribution and $q$ is
-an approximation.
+Suppose $p$ is a target distribution and $q$ is an approximation.
 
 **Forward KL:**
 
-<img src="/assets/images/generative-models/forwardkl.png" alt="Forward KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
-
+<img src="/assets/images/generative-models/forwardkl.png" alt="Forward KL" style="zoom:50%;" />
 $$
 D_{\mathrm{KL}}(p\|q)
 =
@@ -692,7 +690,7 @@ This penalizes $q$ for assigning low probability to regions where $p$ has substa
 
 **Reverse KL:**
 
-<img src="/assets/images/generative-models/reversekl.png" alt="Reverse KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+<img src="/assets/images/generative-models/reversekl.png" alt="Reverse KL" style="zoom:50%;" />
 
 $$
 D_{\mathrm{KL}}(q\|p)
@@ -985,7 +983,7 @@ In other words, the probability that $X$ belongs to $A$ equals the probability t
 
 **Interpretation.** A pushforward distribution describes how a probability distribution changes under a transformation $f$. The values and density may change, but the probability of corresponding events is preserved.
 
-<img src="/assets/images/generative-models/image-20261014020138037.png" alt="Pushforward probability distribution" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+<img src="/assets/images/generative-models/image-20261014020138037.png" alt="Pushforward Distribution" style="zoom:33%;" />
 
 ​						*Figure 1. Pushforward of a probability distribution under a mapping.*
 
