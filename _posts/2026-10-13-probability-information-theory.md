@@ -681,7 +681,6 @@ an approximation.
 **Forward KL:**
 
 <img src="/assets/images/generative-models/forwardkl.png" alt="Forward KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
-
 $$
 D_{\mathrm{KL}}(p\|q)
 =
@@ -985,9 +984,17 @@ In other words, the probability that $X$ belongs to $A$ equals the probability t
 
 **Interpretation.** A pushforward distribution describes how a probability distribution changes under a transformation $f$. The values and density may change, but the probability of corresponding events is preserved.
 
-<img src="/assets/images/generative-models/image-20261014020138037.png" alt="Pushforward probability distribution" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
 
-​						*Figure 1. Pushforward of a probability distribution under a mapping.*
+<div style="text-align: center; margin: 25px 0;">
+  <img src="/assets/images/generative-models/image-20261014020138037.png"
+       alt="Pushforward Distribution"
+       style="display: block; width: 75%; max-width: 100%; height: auto; margin: 0 auto;">
+
+  <div style="margin-top: 10px; font-size: 0.85em; color: #777; font-style: italic; text-align: center;">
+    Figure 1. Pushforward of a probability distribution under a mapping.
+  </div>
+</div>
+
 
 
 ### 6.2 One-Dimensional Change of Variables
