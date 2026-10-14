@@ -6,7 +6,6 @@ mathjax: true
 comments: true
 ---
 
-# Probability and Information Theory for Generative Modeling
 
 **Prerequisites:** calculus, elementary probability.  
 **Aim:** understand probability distributions and the information-theoretic objectives used in VAEs, autoregressive models, diffusion models, and normalizing flows.
@@ -76,7 +75,7 @@ For example,
 $$
 p(x\mid z)
 =
-\frac{p(x,z)}{p(z)},
+\frac{p(x,z)}{p(z)}
 $$
 
 provided $p(z)>0$.
@@ -165,8 +164,6 @@ These two operations play different roles:
 - **Conditioning:** update a distribution using observed information.
 
 Both are fundamental operations in probabilistic modeling.
-
-
 
 
 ## 2. Expectations and Conditional Expectations
@@ -291,7 +288,6 @@ $$
 &=\mathbb E[Y\mid X=x].
 \end{aligned}
 $$
-
 
 
 ### 2.4 Conditional Expectation Minimizes Squared Error
@@ -471,7 +467,6 @@ eigenvalues of $\Sigma$, the entropy depends on
 the overall volume scale of the Gaussian distribution.
 
 
-
 ### 3.3 Conditional Entropy
 
 Conditional entropy measures the remaining uncertainty about $Y$ after observing $X$.
@@ -530,7 +525,6 @@ $$
 The same chain rule holds for differential entropy, replacing $H$ with $h$, whenever the relevant quantities are well-defined.
 
 
-
 ### 3.4 Cross-Entropy
 
 Entropy measures uncertainty under a single distribution.
@@ -585,15 +579,22 @@ $$
 }
 $$
 
-For a fixed $\theta$, assuming the observations are i.i.d. and $\mathbb E_{p_{\mathrm{data}}}
-[|\log p_\theta(X)|]<\infty$, the law of large numbers gives
+For a fixed $\theta$, assume the observations are i.i.d. and the expected absolute log-likelihood is finite:
+
 $$
--\frac1n\sum_{i=1}^n\log p_\theta(X_i)
-\xrightarrow{\mathrm{a.s.}}
--\mathbb E_{p_{\mathrm{data}}}[\log p_\theta(X)]
-=
-H(p_{\mathrm{data}},p_\theta).
+\mathbb E_{p_{\mathrm{data}}}[|\log p_\theta(X)|]<\infty.
 $$
+
+Then the law of large numbers gives
+
+$$
+\begin{aligned}
+&-\frac{1}{n}\sum_{i=1}^{n}\log p_\theta(X_i)\\
+&\quad\xrightarrow{\mathrm{a.s.}} H(p_{\mathrm{data}},p_\theta),
+\end{aligned}
+$$
+
+where $H(p_{\mathrm{data}},p_\theta)=-\mathbb E_{p_{\mathrm{data}}}[\log p_\theta(X)]$.
 
 Thus, empirical NLL estimates the population cross-entropy.
 
@@ -608,7 +609,6 @@ D_{\mathrm{KL}}(p_{\mathrm{data}}\|p_\theta).
 $$
 
 Since $h(p_{\mathrm{data}})$ does not depend on $\theta$, minimizing population cross-entropy is equivalent to minimizing the forward KL divergence.
-
 
 
 ## 4. KL Divergence
@@ -679,7 +679,8 @@ an approximation.
 
 **Forward KL:**
 
-<img src="../assets/images/generative-models/forwardkl.png" alt="image-20261014004158767" style="zoom: 50%;" />
+<img src="/assets/images/generative-models/forwardkl.png" alt="Forward KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+
 $$
 D_{\mathrm{KL}}(p\|q)
 =
@@ -689,10 +690,10 @@ $$
 This penalizes $q$ for assigning low probability to regions where $p$ has substantial probability mass.
 
 
-
 **Reverse KL:**
 
-<img src="../assets/images/generative-models/reversekl.png" alt="image-20261014004253364" style="zoom:50%;" />
+<img src="/assets/images/generative-models/reversekl.png" alt="Reverse KL distribution comparison" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
+
 $$
 D_{\mathrm{KL}}(q\|p)
 =
@@ -917,7 +918,7 @@ Thus, mutual information measures the reduction in uncertainty about one variabl
 
 For discrete random variables, the same identities hold with Shannon entropy $H$ replacing differential entropy $h$.
 
-### 5.3 Conditional KL Representation
+**Conditional KL representation.**
 
 Using the definition of conditional probability,
 
@@ -954,7 +955,6 @@ $$
 This shows that mutual information measures how much observing $X$ changes our distribution over $Z$, on average.
 
 
-
 ## 6. Change of Variables and Pushforward Distributions
 
 ### 6.1 Pushforward Distribution
@@ -983,15 +983,11 @@ $$
 
 In other words, the probability that $X$ belongs to $A$ equals the probability that $Z$ belongs to the preimage of $A$.
 
-**Interpretation.** A pushforward distribution describes how a probability distribution changes under a transformation $f$. The values and density may change, but the probability of corresponding events is preserved:
+**Interpretation.** A pushforward distribution describes how a probability distribution changes under a transformation $f$. The values and density may change, but the probability of corresponding events is preserved.
 
-
-
-<img src="../assets/images/generative-models/image-20261014020138037.png" alt="image-20261014020138037" style="zoom:33%;" />
+<img src="/assets/images/generative-models/image-20261014020138037.png" alt="Pushforward probability distribution" style="width: 60%; height: auto; display: block; margin: 1em auto;" />
 
 ​						*Figure 1. Pushforward of a probability distribution under a mapping.*
-
-
 
 
 ### 6.2 One-Dimensional Change of Variables
@@ -1095,6 +1091,4 @@ For non-invertible transformations, the pushforward distribution is still well-d
 | Gaussian KL | VAE regularization, diffusion ELBO |
 | Mutual information | Representation learning, information bottleneck |
 | Change of variables | Normalizing flows, continuous flows |
-
-
 
