@@ -44,7 +44,7 @@ derive, and implement modern generative models.
 
 **Applications:** VAE, autoregressive models, normalizing flows.
 
-### M02 - Statistical Inference & Latent Variables
+### [M02 - Statistical Inference & Latent Variables]({{ '/2026/10/13/statistical-inference/' | relative_url }})
 
 - Maximum likelihood estimation (MLE)
 - Maximum a posteriori estimation (MAP)
@@ -54,7 +54,7 @@ derive, and implement modern generative models.
 
 **Applications:** GMM, VAE, Bayesian generative models.
 
-### M03 - Variational Inference
+### [M03 - Variational Inference]({{ '/2026/10/14/variational-inference/' | relative_url }})
 
 - Jensen's inequality
 - Evidence Lower Bound (ELBO)
