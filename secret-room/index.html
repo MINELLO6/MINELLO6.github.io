@@ -1,0 +1,94 @@
+---
+layout: default
+permalink: /secret-room/
+title: The Hidden Library
+includelink: false
+sitemap: false
+---
+<style>
+.secret-room {max-width:760px;margin:36px auto;padding:20px 22px;border-radius:17px;background:#171c29;color:#ebe8e3;box-sizing:border-box;min-height:350px}
+.secret-room h1,.secret-room h2{color:#e8d1a3}
+.secret-room p{color:#c6c8d1}.secret-room input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #616a7a;border-radius:8px;background:#252c3b;color:#fff;margin:10px 0}
+.secret-room button{cursor:pointer;background:#c9ae77;color:#171c29;border:0;border-radius:8px;padding:10px 16px;font-weight:600}
+.secret-room button:focus,.secret-room input:focus{outline:2px solid #e8d1a3;outline-offset:2px}
+.secret-room button.article{display:block;text-align:left;width:100%;background:#252d3d;color:#f1e7d4;margin:9px 0}
+.secret-room .muted{font-size:13px;color:#a3a9ba}.secret-room .message{color:#e7a9a5}.secret-room .article-body{line-height:1.8;overflow-wrap:anywhere}
+.secret-room .article-body pre{overflow-x:auto;padding:12px;background:#0f1421;border-radius:8px}.secret-room .article-body code{overflow-wrap:anywhere}
+.secret-room .article-body table{display:block;overflow-x:auto}.secret-room .article-body img{max-width:100%;height:auto}
+.secret-room .article-body a{color:#e8d1a3}.secret-room .article-body blockquote{border-left:3px solid #c9ae77;padding-left:12px}
+@media(max-width:650px){.secret-room{margin:14px 8px;padding:18px 14px}}
+</style>
+<section class="secret-room" aria-label="Password-protected library">
+  <h1>✦ The Hidden Library</h1>
+  <p>A quiet corner for finance, careers, and notes worth keeping.</p>
+  <div id="login">
+    <label for="secret-pass">Access password</label>
+    <input id="secret-pass" type="password" autocomplete="off" placeholder="Your secret key" />
+    <button id="unlock" type="button">Unlock Library</button>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+  </div>
+  <div id="library" hidden>
+    <button id="lock" type="button">Lock</button>
+    <p class="muted">Article titles and contents are decrypted only in your browser.</p>
+    <div id="article-list"></div>
+    <article id="article-view" class="article-body" hidden></article>
+    <button id="back" type="button" hidden>← Back to library</button>
+  </div>
+</section>
+<!-- PINNED RENDERING LIBRARIES: these execute on the public page, so only use trusted sources. -->
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+<script>
+(()=>{
+  'use strict';
+  const $=id=>document.getElementById(id);
+  let notes=[];
+  const encoder=new TextEncoder(), decoder=new TextDecoder();
+  const decode64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+  async function decrypt(payload,password){
+    if(payload.version!==1||payload.kdf!=='PBKDF2-SHA256') throw Error('Unsupported data format');
+    if(payload.iterations<600000||payload.iterations>2000000) throw Error('Invalid encryption settings');
+    const base=await crypto.subtle.importKey('raw',encoder.encode(password),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:decode64(payload.salt),iterations:payload.iterations,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+    const data=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode64(payload.nonce),additionalData:encoder.encode('HiddenLibrary-v1')},key,decode64(payload.ciphertext));
+    return JSON.parse(decoder.decode(data));
+  }
+  function list(){
+    $('article-list').replaceChildren();$('article-list').hidden=false;$('article-view').hidden=true;$('back').hidden=true;
+    notes.forEach((note,i)=>{
+      const b=document.createElement('button');b.type='button';b.className='article';b.textContent=note.title;
+      b.onclick=()=>show(i);$('article-list').appendChild(b);
+    });
+  }
+  function show(i){
+    const note=notes[i];if(!note)return;
+    $('article-view').replaceChildren();
+    const h=document.createElement('h2');h.textContent=note.title;$('article-view').appendChild(h);
+    const body=document.createElement('div');
+    if(typeof marked==='undefined'||typeof DOMPurify==='undefined'){
+      const pre=document.createElement('pre');pre.textContent=note.markdown;body.appendChild(pre);
+    }else{
+      const html=marked.parse(note.markdown,{gfm:true,breaks:false});
+      body.innerHTML=DOMPurify.sanitize(html,{USE_PROFILES:{html:true}});
+    }
+    $('article-view').appendChild(body);$('article-list').hidden=true;$('article-view').hidden=false;$('back').hidden=false;
+    if(window.MathJax?.typesetPromise) MathJax.typesetPromise([body]).catch(()=>{});
+  }
+  $('unlock').onclick=async()=>{
+    const password=$('secret-pass').value;
+    $('message').textContent='Unlocking…';$('unlock').disabled=true;
+    try{
+      const res=await fetch('{{ "/secret-room/encrypted-data.json" | relative_url }}',{cache:'no-store'});
+      if(!res.ok)throw Error('Encrypted library not found; run the encryption script first.');
+      const data=await decrypt(await res.json(),password);
+      if(!Array.isArray(data.articles))throw Error('Invalid library data');
+      notes=data.articles.filter(n=>typeof n.title==='string'&&typeof n.markdown==='string');
+      $('secret-pass').value='';$('login').hidden=true;$('library').hidden=false;list();
+    }catch(e){$('message').textContent=e.message.includes('library not found')?e.message:'Incorrect password or unreadable encrypted data.';}
+    finally{$('unlock').disabled=false;}
+  };
+  $('secret-pass').onkeydown=e=>{if(e.key==='Enter')$('unlock').click();};
+  $('back').onclick=list;
+  $('lock').onclick=()=>{notes=[];$('article-list').replaceChildren();$('article-view').replaceChildren();$('library').hidden=true;$('login').hidden=false;$('message').textContent='';};
+})();
+</script>

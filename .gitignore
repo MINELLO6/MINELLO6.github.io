@@ -1,2 +1,5 @@
 _drafts/
 _site/
+/secret-source/
+/.secret-local/
+/tools/__pycache__/
