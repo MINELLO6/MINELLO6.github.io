@@ -967,21 +967,67 @@ a:visited {
 
 
 /* =========================================
-   Markdown: automatically center tables
+   Academic Markdown Tables
    ========================================= */
 
+
+/* Table layout */
+
 .post-content table {
-    margin-left: auto;
-    margin-right: auto;
+    width: auto;
+    max-width: 100%;
+    margin: 24px auto;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    line-height: 1.6;
 }
 
 
-/* Mobile: center small tables and allow scrolling */
+/* Table cells */
+
+.post-content table th,
+.post-content table td {
+    padding: 10px 16px;
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+
+/* Header separator */
+
+.post-content table thead th {
+    font-weight: 600;
+    border-bottom: 2px solid #444;
+}
+
+
+/* Subtle row separators */
+
+.post-content table tbody td {
+    border-bottom: 1px solid #eaeaea;
+}
+
+
+/* Remove last border */
+
+.post-content table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Mobile responsive tables */
 
 @media screen and (max-width: 600px) {
     .post-content table {
-        width: fit-content;
+        display: block;
         max-width: 100%;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .post-content table th,
+    .post-content table td {
+        padding: 8px 12px;
     }
 }
